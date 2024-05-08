@@ -1,4 +1,2 @@
-package org.example.Controller;
-
-public class SceneController {
+package org.example.Controller;public class SceneController {
 }
