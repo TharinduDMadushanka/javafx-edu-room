@@ -1,7 +1,26 @@
 package org.example;
 
-public class Main {
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
+import java.io.IOException;
+
+public class Main extends Application {
+
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        launch(args);
+    }
+    @Override
+    public void start(Stage stage) throws IOException {
+        Scene scene=new Scene(FXMLLoader.load(getClass().getResource("/view/css.fxml")));
+
+        Group root= new Group();
+        Stage stage2=new Stage();
+
+        stage2.setScene(scene);
+        stage2.show();
     }
 }
