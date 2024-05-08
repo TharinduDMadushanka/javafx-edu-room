@@ -22,9 +22,17 @@ public class MyController {
         System.out.println("The button is clicked.");
     }
 
-    public void goPageTwo(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("views/pageTwo.fxml"));
-        stage=(Stage)((Node)event.getSource()).getScene().getWindow();
+//    public void goPageTwo(ActionEvent event) throws IOException {
+//        Parent root = FXMLLoader.load(getClass().getResource("views/pageTwo.fxml"));
+//        stage=(Stage)((Node)event.getSource()).getScene().getWindow();
+//        scene=new Scene(root);
+//        stage.setScene(scene);
+//        stage.show();
+//    }
+
+    public void goPageTwo(javafx.event.ActionEvent actionEvent) throws  IOException{
+        Parent root = FXMLLoader.load(getClass().getResource("/views/pageTwo.fxml"));
+        stage=(Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         scene=new Scene(root);
         stage.setScene(scene);
         stage.show();
