@@ -13,6 +13,6 @@
             <Font size="36.0" />
          </font>
       </Label>
-      <Button layoutX="14.0" layoutY="353.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="70.0" text="page 1" textFill="#1b08c7" />
+      <Button layoutX="14.0" layoutY="353.0" mnemonicParsing="false" onAction="#goPageOne" prefHeight="34.0" prefWidth="70.0" text="page 1" textFill="#1b08c7" />
    </children>
 </AnchorPane>
