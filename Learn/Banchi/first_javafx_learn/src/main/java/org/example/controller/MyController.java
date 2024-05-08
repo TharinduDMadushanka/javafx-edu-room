@@ -37,4 +37,13 @@ public class MyController {
         stage.setScene(scene);
         stage.show();
     }
+
+    public void openNewWindow() throws IOException {
+        FXMLLoader fxmlloader=new FXMLLoader(getClass().getResource("/views/pageTwo.fxml"));
+        Parent root =(Parent) fxmlloader.load();
+        Stage stage=new Stage();
+        stage.setTitle("Page 2");
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
 }

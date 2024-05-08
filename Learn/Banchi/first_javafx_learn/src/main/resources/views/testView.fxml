@@ -14,5 +14,6 @@
       </Label>
       <Button layoutX="14.0" layoutY="113.0" mnemonicParsing="false" onAction="#buttonClick" prefHeight="39.0" prefWidth="78.0" text="Click Me" textFill="#1933d9" />
       <Button layoutX="14.0" layoutY="348.0" mnemonicParsing="false" onAction="#goPageTwo" prefHeight="39.0" prefWidth="78.0" text="Page 2" textAlignment="CENTER" textFill="#2c0ce4" />
+      <Button layoutX="451.0" layoutY="348.0" mnemonicParsing="false" onAction="#openNewWindow" prefHeight="39.0" prefWidth="134.0" text="New Window page 2" textAlignment="CENTER" textFill="#2c0ce4" />
    </children>
 </AnchorPane>
