@@ -8,7 +8,7 @@ public class MainFormController {
 
     public void clickMeOnAction(ActionEvent actionEvent) {
 
-
+        lblName.setText("Welcome ");
 
     }
 }
