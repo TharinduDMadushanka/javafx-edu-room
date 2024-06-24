@@ -1,4 +1,4 @@
-package Chart.pieChart;
+package AreaChart;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -12,7 +12,7 @@ public class AppInitializer extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/Chart.pieChart/MainForm.fxml"))));
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/AreaChart/MainForm.fxml"))));
         stage.show();
     }
 }
