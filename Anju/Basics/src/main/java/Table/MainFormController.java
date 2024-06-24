@@ -1,13 +1,36 @@
 package Table;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
 public class MainFormController {
-    public TableView tblCustomer;
-    public TableColumn colId;
-    public TableColumn colName;
-    public TableColumn colAddress;
-    public TableColumn colSalary;
-    public TableColumn colDelete;
+    public TableView<CustomerTM> tblCustomer;
+    public TableColumn<CustomerTM,String> colId;
+    public TableColumn<CustomerTM,String>  colName;
+    public TableColumn<CustomerTM,String>  colAddress;
+    public TableColumn<CustomerTM,Double>  colSalary;
+    public TableColumn<CustomerTM, Button>  colDelete;
+
+    public void initialize() {
+
+        ObservableList<CustomerTM> custList= FXCollections.observableArrayList();
+
+        for(Customer c :Database.customersDataList){
+
+            Button button=new Button("Delete");
+
+            custList.add(new CustomerTM(
+                    c.getNic(),
+                    c.getName(),
+                    c.getAddress(),
+                    c.getSalary(),
+                    button
+            ));
+        }
+
+        tblCustomer.setItems(custList);
+    }
 }
