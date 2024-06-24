@@ -3,6 +3,7 @@ package ComboBox;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,6 +11,7 @@ import java.util.Arrays;
 public class MainFormController {
     //public ComboBox<String> cmbLanguages;
     public ComboBox cmbLanguages;
+    public TextField txtLoadLanguage;
 
     ArrayList<String> languages = new ArrayList<>(
             Arrays.asList("Java","Python","Ruby","JS")
@@ -31,6 +33,10 @@ public class MainFormController {
         ObservableList<String> items = FXCollections.observableArrayList(languages);
 
         cmbLanguages.setItems(items);
+
+        cmbLanguages.getSelectionModel().selectedItemProperty().addListener((observableValue, o, t1) -> {
+            txtLoadLanguage.setText(t1.toString());
+        }); // show in text area
 
     }
 
