@@ -19,5 +19,6 @@ public class MainFormController {
 
     public void onKeyRelease(KeyEvent keyEvent) {
         String value = txtKeyRelease.getText();
+        lblKeyReleaseAnswer.setText(value); // give same enter answer
     }
 }
