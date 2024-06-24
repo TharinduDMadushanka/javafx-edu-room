@@ -5,11 +5,18 @@ import javafx.fxml.Initializable;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class MainFormController implements Initializable { //functional interface -- > have only one method
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        System.out.println("hello");
+public class MainFormController{
+
+    public void initialize() {
+        System.out.println("Hello");
     }
+
+
+    //functional interface -- > have only one method
+//    @Override
+//    public void initialize(URL url, ResourceBundle resourceBundle) {
+//        System.out.println("hello");
+//    }
 
     //Error
 //    MainFormController(){
