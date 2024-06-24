@@ -14,7 +14,7 @@ public class AppInitializer extends Application {
     @Override
     public void start(Stage stage) throws Exception {
 
-        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("MainForm.fxml"))));
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/KeyPressing/MainForm.fxml"))));
         stage.show();
     }
 }

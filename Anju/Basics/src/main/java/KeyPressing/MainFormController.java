@@ -10,7 +10,7 @@ public class MainFormController {
 
     public void keyPressOnAction(KeyEvent actionEvent) {
 
-        String value = txtKeyPress.getText();
+        String value = txtKeyPress.getText(); // get old value
         lblKeyPressAnswer.setText(value);
 
     }
