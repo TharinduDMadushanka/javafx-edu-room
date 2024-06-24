@@ -22,7 +22,7 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <TextField fx:id="txtKeyPress" layoutX="44.0" layoutY="69.0" onAction="#keyPressOnAction" prefHeight="35.0" prefWidth="230.0" promptText="Type Here">
+      <TextField fx:id="txtKeyPress" layoutX="44.0" layoutY="69.0" onKeyPressed="#keyPressOnAction" prefHeight="35.0" prefWidth="230.0" promptText="Type Here">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
