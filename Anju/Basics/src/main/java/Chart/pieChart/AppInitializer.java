@@ -13,5 +13,6 @@ public class AppInitializer extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/Chart.pieChart/MainForm.fxml"))));
+        stage.show();
     }
 }
