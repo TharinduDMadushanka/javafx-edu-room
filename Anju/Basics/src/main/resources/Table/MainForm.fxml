@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Table.MainFormController">
+   <children>
+      <TableView fx:id="tblCustomer" layoutX="50.0" layoutY="100.0" prefHeight="200.0" prefWidth="499.0">
+        <columns>
+          <TableColumn fx:id="colId" prefWidth="76.800048828125" text="NIC" />
+          <TableColumn fx:id="colName" prefWidth="146.4000244140625" text="Name" />
+            <TableColumn fx:id="colAddress" prefWidth="103.99993896484375" text="Address" />
+            <TableColumn fx:id="colSalary" prefWidth="99.20001220703125" text="Salary" />
+            <TableColumn fx:id="colDelete" prefWidth="73.60003662109375" text="Delete" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>
