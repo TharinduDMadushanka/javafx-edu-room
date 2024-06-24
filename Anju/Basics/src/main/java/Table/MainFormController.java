@@ -23,14 +23,22 @@ public class MainFormController {
         colSalary.setCellValueFactory(new PropertyValueFactory<>("salary"));
         colDelete.setCellValueFactory(new PropertyValueFactory<>("button"));
 
+        loadData();
 
+    }
 
+    private void loadData(){
 
         ObservableList<CustomerTM> custList= FXCollections.observableArrayList();
 
         for(Customer c :Database.customersDataList){
 
             Button button=new Button("Delete");
+
+            button.setOnAction(actionEvent -> {// remove when click delete button
+                Database.customersDataList.remove(c);
+                loadData();
+            });
 
             custList.add(new CustomerTM(
                     c.getNic(),
