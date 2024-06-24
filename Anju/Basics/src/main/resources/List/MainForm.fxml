@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.text.Font?>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="List.MainFormController"
+            prefHeight="400.0" prefWidth="600.0">
+
+    <children>
+        <TextField fx:id="textInput" layoutX="76.0" layoutY="30.0" onAction="#inputOnAction" prefHeight="25.0" prefWidth="451.0" promptText="Type Here">
+            <font>
+                <Font name="System Bold" size="14.0" />
+            </font>
+        </TextField>
+        <ListView fx:id="lstLanguages" layoutX="109.0" layoutY="75.0" prefHeight="260.0" prefWidth="368.0" />
+        <TextField fx:id="txtOutput" disable="true" layoutX="58.0" layoutY="370.0" prefHeight="25.0" prefWidth="451.0">
+            <font>
+                <Font name="System Bold" size="14.0" />
+            </font>
+        </TextField>
+    </children>
+
+</AnchorPane>
