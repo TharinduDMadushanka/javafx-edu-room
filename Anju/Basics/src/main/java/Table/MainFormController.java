@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 public class MainFormController {
     public TableView<CustomerTM> tblCustomer;
@@ -15,6 +16,9 @@ public class MainFormController {
     public TableColumn<CustomerTM, Button>  colDelete;
 
     public void initialize() {
+
+        colId.setCellValueFactory(new PropertyValueFactory<>("nic"));
+
 
         ObservableList<CustomerTM> custList= FXCollections.observableArrayList();
 
