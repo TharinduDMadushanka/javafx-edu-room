@@ -28,5 +28,11 @@
          </font>
       </TextField>
       <Label fx:id="lblKeyPressAnswer" layoutX="329.0" layoutY="70.0" prefHeight="35.0" prefWidth="230.0" />
+      <TextField fx:id="txtKeyRelease" layoutX="44.0" layoutY="254.0" onKeyPressed="#keyPressOnAction" onKeyReleased="#onKeyRelease" prefHeight="35.0" prefWidth="230.0" promptText="Type Here">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </TextField>
+      <Label fx:id="lblKeyReleaseAnswer" layoutX="329.0" layoutY="254.0" prefHeight="35.0" prefWidth="230.0" />
    </children>
 </AnchorPane>
