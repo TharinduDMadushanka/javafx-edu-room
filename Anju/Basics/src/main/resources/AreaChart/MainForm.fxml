@@ -17,7 +17,7 @@
       </Label>
       <AreaChart fx:id="areaChart" layoutX="40.0" layoutY="74.0" prefHeight="296.0" prefWidth="500.0">
         <xAxis>
-          <CategoryAxis side="BOTTOM" />
+          <NumberAxis side="BOTTOM" />
         </xAxis>
         <yAxis>
           <NumberAxis side="LEFT" />
