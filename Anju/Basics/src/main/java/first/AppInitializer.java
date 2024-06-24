@@ -1,6 +1,8 @@
 package first;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -16,7 +18,8 @@ public class AppInitializer extends Application {
         //catch fxml file
         URL resource = getClass().getResource("MainForm.fxml");
 
-
+        //load to the RAM
+        Parent load = FXMLLoader.load(resource);
 
 
     }
