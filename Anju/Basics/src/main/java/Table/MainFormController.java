@@ -18,6 +18,12 @@ public class MainFormController {
     public void initialize() {
 
         colId.setCellValueFactory(new PropertyValueFactory<>("nic"));
+        colName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        colAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
+        colSalary.setCellValueFactory(new PropertyValueFactory<>("salary"));
+        colDelete.setCellValueFactory(new PropertyValueFactory<>("button"));
+
+
 
 
         ObservableList<CustomerTM> custList= FXCollections.observableArrayList();
