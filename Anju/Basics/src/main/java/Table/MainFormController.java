@@ -2,10 +2,10 @@ package Table;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+
+import java.util.Optional;
 
 public class MainFormController {
     public TableView<CustomerTM> tblCustomer;
@@ -36,8 +36,15 @@ public class MainFormController {
             Button button=new Button("Delete");
 
             button.setOnAction(actionEvent -> {// remove when click delete button
-                Database.customersDataList.remove(c);
-                loadData();
+
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION,"Are you sure ?", ButtonType.NO,ButtonType.YES);
+                Optional<ButtonType> buttonType = alert.showAndWait();
+
+                if(buttonType.get() == ButtonType.YES){
+                    Database.customersDataList.remove(c);
+                    loadData();
+                }
+
             });
 
             custList.add(new CustomerTM(
