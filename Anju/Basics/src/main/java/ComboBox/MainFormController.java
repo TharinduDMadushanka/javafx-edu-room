@@ -3,7 +3,7 @@ package ComboBox;
 import javafx.scene.control.ComboBox;
 
 public class MainFormController {
-    public ComboBox cmbLanguages;
+    public ComboBox<String> cmbLanguages;
 
     public void initialize(){
 
