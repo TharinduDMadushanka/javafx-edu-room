@@ -15,21 +15,20 @@ public class AppInitializer extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+        // Catch FXML file
+        URL resource = getClass().getResource("/first/MainForm.fxml");
 
-        //catch fxml file
-        URL resource = getClass().getResource("MainForm.fxml");
 
-        //load to the RAM
+        // Load to the RAM
         Parent load = FXMLLoader.load(resource);
 
-        // create a scene
+        // Create a scene
         Scene scene = new Scene(load);
 
-        //Set Scene to stage
+        // Set Scene to stage
         stage.setScene(scene);
 
-        //show Stage
+        // Show Stage
         stage.show();
-
     }
 }

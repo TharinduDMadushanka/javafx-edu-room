@@ -7,8 +7,6 @@ public class MainFormController {
     public Label lblName;
 
     public void clickMeOnAction(ActionEvent actionEvent) {
-
-        lblName.setText("Welcome ");
-
+        lblName.setText("Welcome");
     }
 }
