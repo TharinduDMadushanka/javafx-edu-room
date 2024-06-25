@@ -2,6 +2,8 @@ package lk.practice.controller;
 
 import javafx.scene.control.Label;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
+import javafx.stage.Window;
 import lk.practice.service.LoadingTask;
 
 public class SplashScreenController {
@@ -22,6 +24,13 @@ public class SplashScreenController {
             lblProgress.setText(formatNumber+" %");
 
             recSub.setWidth(recMain.getWidth()*newValue.doubleValue());
+
+            if (newValue.doubleValue()==1.0){ // close when splash screen done
+                Window window = lblProgress.getScene().getWindow();
+                Stage stage = (Stage) window;
+                stage.close();
+            }
+
 
         });
 
