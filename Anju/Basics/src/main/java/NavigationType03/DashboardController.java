@@ -10,10 +10,12 @@ public class DashboardController {
     public AnchorPane loadContex;
 
     public void windowAOnAction(ActionEvent actionEvent) throws IOException {
+        loadContex.getChildren().clear();
         loadContex.getChildren().add(FXMLLoader.load(getClass().getResource("/NavigationType03/WindowA.fxml")));
     }
 
     public void windowBOnAction(ActionEvent actionEvent) throws IOException {
+        loadContex.getChildren().clear();
         loadContex.getChildren().add(FXMLLoader.load(getClass().getResource("/NavigationType03/WindowB.fxml")));
     }
 }
