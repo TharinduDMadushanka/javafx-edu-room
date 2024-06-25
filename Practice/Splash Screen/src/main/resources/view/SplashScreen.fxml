@@ -7,13 +7,10 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="320.0" prefWidth="476.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.practice.controller.SplashScreenController">
    <children>
-      <ImageView fitHeight="320.0" fitWidth="598.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../../../../../../Downloads/wooden-table-with-blurred-background.jpg" />
-         </image>
+      <ImageView fitHeight="320.0" fitWidth="480.0" pickOnBounds="true" preserveRatio="true">
+         <Image url="@/img/wooden-table-with-blurred-background.jpg" />
       </ImageView>
       <Rectangle fx:id="recMain" arcHeight="5.0" arcWidth="5.0" fill="#b8c6d48b" height="21.0" layoutX="14.0" layoutY="285.0" stroke="BLACK" strokeType="INSIDE" width="451.0" />
       <Rectangle fx:id="recSub" arcHeight="5.0" arcWidth="5.0" fill="#16c946" height="21.0" layoutX="14.0" layoutY="285.0" stroke="BLACK" strokeType="INSIDE" width="24.0" />
