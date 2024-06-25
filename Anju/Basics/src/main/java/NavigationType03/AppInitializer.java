@@ -12,7 +12,7 @@ public class AppInitializer extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/NavigationType03/MainForm.fxml"))));
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/NavigationType03/Dashboard.fxml"))));
         stage.show();
     }
 }
