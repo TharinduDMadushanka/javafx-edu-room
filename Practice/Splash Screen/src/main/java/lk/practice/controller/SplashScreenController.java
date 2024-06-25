@@ -2,6 +2,7 @@ package lk.practice.controller;
 
 import javafx.scene.control.Label;
 import javafx.scene.shape.Rectangle;
+import lk.practice.service.LoadingTask;
 
 public class SplashScreenController {
 
@@ -9,6 +10,14 @@ public class SplashScreenController {
     public Rectangle recSub;
     public Label lblProgress;
 
+    public void initialize() {
 
+        LoadingTask task = new LoadingTask();
+        task.progressProperty().addListener((observable, oldValue, newValue) -> {
+            System.out.println(newValue.doubleValue());
+        });
+
+        new Thread(task).start();
+    }
 
 }
