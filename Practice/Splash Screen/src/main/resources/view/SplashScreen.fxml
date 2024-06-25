@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="320.0" prefWidth="476.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.practice.controller.SplashScreenController">
+   <children>
+      <ImageView fitHeight="320.0" fitWidth="598.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../../Downloads/wooden-table-with-blurred-background.jpg" />
+         </image>
+      </ImageView>
+      <Rectangle fx:id="recMain" arcHeight="5.0" arcWidth="5.0" fill="#b8c6d48b" height="21.0" layoutX="14.0" layoutY="285.0" stroke="BLACK" strokeType="INSIDE" width="451.0" />
+      <Rectangle fx:id="recSub" arcHeight="5.0" arcWidth="5.0" fill="#16c946" height="21.0" layoutX="14.0" layoutY="285.0" stroke="BLACK" strokeType="INSIDE" width="24.0" />
+      <Label layoutX="203.0" layoutY="255.0" prefHeight="22.0" prefWidth="58.0" text="Loading..">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblProgress" layoutX="275.0" layoutY="258.0" text="25%">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="126.0" layoutY="22.0" prefHeight="54.0" prefWidth="226.0" text="~Welcome~" textFill="#291f1f">
+         <font>
+            <Font name="System Bold Italic" size="36.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
