@@ -1,5 +1,9 @@
 package NavigationType02;
 
+/**
+ * load new window in same window
+ */
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
