@@ -1,0 +1,15 @@
+#btnSave{
+    -fx-background-color: #5d8ec6;
+}
+#btnSave:hover{
+    -fx-background-color: #6dcccc;
+}
+#btnSave:pressed{
+    -fx-background-color: #09262e;
+    -fx-text-fill: #cac9c9;
+}
+.my_style_class{
+    -fx-background-color: transparent;
+    -fx-border-color: #5252b3;
+    -fx-border-width: 2px;
+}
