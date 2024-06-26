@@ -20,8 +20,9 @@ public class StudentModel {
         PreparedStatement statement=connection.prepareStatement(sql);
         statement.setString(1,studentDto.getName());
         statement.setInt(2,studentDto.getAge());
+        statement.setInt(3,studentDto.getGrade());
 
-
+        return statement.executeUpdate() > 0 ? "Success" : "Fail";
     }
 
 }
