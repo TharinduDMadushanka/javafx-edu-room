@@ -1,4 +1,4 @@
-import lk.practice.controller.initializer.AppInitializer;
+import Initializer.AppInitializer;
 
 public class Starter{
     public static void main(String[] args) {

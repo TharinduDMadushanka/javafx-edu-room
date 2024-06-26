@@ -1,4 +1,4 @@
-package lk.practice.controller.initializer;
+package Initializer;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
