@@ -3,12 +3,12 @@ package Dto;
 public class StudentDto {
     private String name;
     private int age;
-    private String grade;
+    private int grade;
 
     public StudentDto() {
     }
 
-    public StudentDto(String name, int age, String grade) {
+    public StudentDto(String name, int age, int grade) {
         this.name = name;
         this.age = age;
         this.grade = grade;
@@ -30,11 +30,11 @@ public class StudentDto {
         this.age = age;
     }
 
-    public String getGrade() {
+    public int getGrade() {
         return grade;
     }
 
-    public void setGrade(String grade) {
+    public void setGrade(int grade) {
         this.grade = grade;
     }
 

@@ -1,4 +1,4 @@
-package lk.practice.controller;
+package Controller;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
