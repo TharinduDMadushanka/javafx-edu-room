@@ -1,8 +1,11 @@
 package com.institute.iitManage.controller;
 
+import com.institute.iitManage.db.Database;
+import com.institute.iitManage.model.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -16,13 +19,23 @@ public class SignupFormController {
     public TextField txtLastName;
     public TextField txtPassword;
 
-    public void signupOnAction(ActionEvent actionEvent) {
+    public void signupOnAction(ActionEvent actionEvent) throws IOException {
+
+        String firstName = txtFirstName.getText().trim().toLowerCase();
+        String lastname = txtLastName.getText().trim().toLowerCase();
+        String email = txtEmail.getText().trim().toLowerCase();
+        String password = txtPassword.getText().trim();
+
+        Database.userTable.add(
+                new User(firstName,lastname,email,password)
+        );
+        new Alert(Alert.AlertType.CONFIRMATION,"Your Account has been Created...!").show();
+        setUI("LoginForm");
     }
 
     public void alreadyHaveAccountOnAction(ActionEvent actionEvent) throws IOException {
         setUI("LoginForm");
     }
-
 
     private void setUI(String location) throws IOException {
         Stage stage = (Stage) context.getScene().getWindow();
