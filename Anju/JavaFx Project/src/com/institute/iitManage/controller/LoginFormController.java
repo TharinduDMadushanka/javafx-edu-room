@@ -1,14 +1,18 @@
 package com.institute.iitManage.controller;
 
+import com.institute.iitManage.db.Database;
+import com.institute.iitManage.model.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Optional;
 
 public class LoginFormController {
     public AnchorPane context;
@@ -17,6 +21,34 @@ public class LoginFormController {
     public Hyperlink txtForgotPw;
 
     public void loginOnAction(ActionEvent actionEvent) {
+
+        String email = txtEmail.getText().trim().toLowerCase();
+        String password = txtPassword.getText().trim();
+
+        /*for(User user: Database.userTable){
+            if(user.getEmail().equals(email)){
+                if(user.getPassword().equals(password)){
+                    System.out.println(user.toString());
+                    return;
+                }else {
+                    new Alert(Alert.AlertType.ERROR,"Email or Password Incorrect").show();
+                    return;
+                }
+            }
+        }
+        new Alert(Alert.AlertType.ERROR,"User Not Found...!");*/
+
+        Optional<User> selectedUser = Database.userTable.stream().filter(e -> e.getEmail().equals(email)).findFirst();
+        if(selectedUser.isPresent()){
+            if (selectedUser.get().getPassword().equals(password)){
+                System.out.println(selectedUser.get());
+            }else {
+                new Alert(Alert.AlertType.ERROR,"Email or Password Incorrect...!").show();
+            }
+        }else {
+            new Alert(Alert.AlertType.ERROR,"User Not Found...!").show();
+        }
+
     }
 
     public void createAccountOnAction(ActionEvent actionEvent) throws IOException {
