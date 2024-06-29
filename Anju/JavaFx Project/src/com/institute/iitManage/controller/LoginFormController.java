@@ -2,6 +2,7 @@ package com.institute.iitManage.controller;
 
 import com.institute.iitManage.db.Database;
 import com.institute.iitManage.model.User;
+import com.institute.iitManage.util.security.PasswordManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -40,7 +41,7 @@ public class LoginFormController {
 
         Optional<User> selectedUser = Database.userTable.stream().filter(e -> e.getEmail().equals(email)).findFirst();
         if(selectedUser.isPresent()){
-            if (selectedUser.get().getPassword().equals(password)){
+            if (new PasswordManager().checkPassword(password,selectedUser.get().getPassword())){
                 System.out.println(selectedUser.get());
             }else {
                 new Alert(Alert.AlertType.ERROR,"Email or Password Incorrect...!").show();
