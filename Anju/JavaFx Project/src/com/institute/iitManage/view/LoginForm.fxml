@@ -30,9 +30,9 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </TextField>
-      <Hyperlink fx:id="txtForgotPw" layoutX="86.0" layoutY="186.0" text="Forgot Password">
+      <Hyperlink fx:id="txtForgotPw" layoutX="79.0" layoutY="186.0" text="Forgot Password">
          <font>
-            <Font size="14.0" />
+            <Font name="System Bold" size="14.0" />
          </font>
       </Hyperlink>
       <Button layoutX="13.0" layoutY="240.0" mnemonicParsing="false" onAction="#loginOnAction" prefHeight="30.0" prefWidth="186.0" style="-fx-background-color: #35A8ED;" text="Login" textFill="WHITE">
@@ -50,8 +50,8 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Button>
-      <Separator layoutX="232.0" orientation="VERTICAL" prefHeight="403.0" prefWidth="0.0" />
-      <ImageView fitHeight="403.0" fitWidth="383.0" layoutX="238.0" pickOnBounds="true">
+      <Separator layoutX="232.0" layoutY="13.0" orientation="VERTICAL" prefHeight="381.0" prefWidth="5.0" />
+      <ImageView fitHeight="381.0" fitWidth="372.0" layoutX="238.0" layoutY="9.0" pickOnBounds="true">
          <image>
             <Image url="@../asset/login.jpg" />
          </image>
