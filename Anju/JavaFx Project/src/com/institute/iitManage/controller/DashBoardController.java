@@ -14,7 +14,8 @@ public class DashBoardController {
     public Label lblDate;
     public Label lblTime;
 
-    public void studentsOnAction(ActionEvent actionEvent) {
+    public void studentsOnAction(ActionEvent actionEvent) throws IOException {
+        setUI("StudentForm");
     }
 
     public void teacherOnAction(ActionEvent actionEvent) {

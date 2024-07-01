@@ -1,21 +1,24 @@
-package com.institute.iitManage.model;
+package com.institute.iitManage.model.Tm;
 
-import java.util.Date;
+import javafx.scene.control.Button;
 
-public class Student {
+
+public class StudentTm {
     private String id;
     private String name;
-    private Date dob;
+    private String dob;
     private String address;
+    private Button button;
 
-    public Student() {
+    public StudentTm() {
     }
 
-    public Student(String id, String name, Date dob, String address) {
+    public StudentTm(String id, String name, String dob, String address, Button button) {
         this.id = id;
         this.name = name;
         this.dob = dob;
         this.address = address;
+        this.button = button;
     }
 
     public String getId() {
@@ -34,11 +37,11 @@ public class Student {
         this.name = name;
     }
 
-    public Date getDob() {
+    public String getDob() {
         return dob;
     }
 
-    public void setDob(Date dob) {
+    public void setDob(String dob) {
         this.dob = dob;
     }
 
@@ -50,13 +53,11 @@ public class Student {
         this.address = address;
     }
 
-    @Override
-    public String toString() {
-        return "Student{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", dob=" + dob +
-                ", address='" + address + '\'' +
-                '}';
+    public Button getButton() {
+        return button;
+    }
+
+    public void setButton(Button button) {
+        this.button = button;
     }
 }
