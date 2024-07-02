@@ -122,4 +122,12 @@ public class TeacherFormController {
         txtAddress.clear();
         txtContact.clear();
     }
+
+    private void setTableDataValue(TeacherTm teacher){
+        txtTeacherID.setText(teacher.getTeacherId());
+        txtFullName.setText(teacher.getName());
+        txtAddress.setText(teacher.getAddress());
+        txtContact.setText(teacher.getContact());
+        btnSaveTeacher.setText("Update Teacher");
+    }
 }
