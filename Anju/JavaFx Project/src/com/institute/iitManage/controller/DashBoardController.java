@@ -25,7 +25,8 @@ public class DashBoardController {
     public void intakeOnAction(ActionEvent actionEvent) {
     }
 
-    public void courseOnAction(ActionEvent actionEvent) {
+    public void courseOnAction(ActionEvent actionEvent) throws IOException {
+        setUI("CourseForm");
     }
 
     public void registrationOnAction(ActionEvent actionEvent) {
