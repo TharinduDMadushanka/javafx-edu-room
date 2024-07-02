@@ -130,6 +130,7 @@ public class TeacherFormController {
             if (teacher.getTeacherId().contains(name)){
 
                 Button button = new Button("Delete");
+                Teacher currentTeacher= teacher; // Create a final copy of the current teacher
 
                 oblist.add(new TeacherTm(
                         teacher.getTeacherId(),
@@ -140,11 +141,11 @@ public class TeacherFormController {
                 ));
 
                 button.setOnAction(event -> {
-                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure...!", ButtonType.YES, ButtonType.NO, ButtonType.YES);
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure...!", ButtonType.YES, ButtonType.NO);
                     Optional<ButtonType> buttonType = alert.showAndWait();
 
                     if (buttonType.get().equals(ButtonType.YES)) {
-                        Database.teacherTable.remove(teacher);
+                        Database.teacherTable.remove(currentTeacher);
                         new Alert(Alert.AlertType.CONFIRMATION, "Teacher has been Deleted!").show();
                         setTableData(searchText);
                     }
