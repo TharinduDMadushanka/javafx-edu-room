@@ -59,6 +59,40 @@ public class TeacherFormController {
     }
 
     public void saveTeacherOnAction(ActionEvent actionEvent) {
+
+        if (btnSaveTeacher.getText().equalsIgnoreCase("Save Teacher")) {
+            Teacher teacher = new Teacher(
+                    txtTeacherID.getText(),
+                    txtFullName.getText(),
+                    txtContact.getText(),
+                    txtAddress.getText()
+            );
+
+            Database.teacherTable.add(teacher);
+            generateTeacherId();
+            clear();
+            setTableData(searchText);
+            new Alert(Alert.AlertType.INFORMATION, "Teacher has been Saved...!").show();
+            System.out.println(teacher.toString());
+
+        }else {
+
+            for(Teacher teacher : Database.teacherTable){
+
+                if (teacher.getTeacherId().equals(txtTeacherID.getText())){
+                    teacher.setName(txtFullName.getText());
+                    teacher.setContact(txtContact.getText());
+                    teacher.setAddress(txtAddress.getText());
+
+                    setTableData(searchText);
+                    generateTeacherId();
+                    clear();
+                    new Alert(Alert.AlertType.INFORMATION, "Teacher has been updated...!").show();
+                    btnSaveTeacher.setText("Save Teacher");
+                    return;
+                }
+            }
+        }
     }
 
     private void setUi(String location)throws Exception {
