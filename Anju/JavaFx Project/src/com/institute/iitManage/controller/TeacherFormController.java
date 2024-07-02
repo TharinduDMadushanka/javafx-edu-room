@@ -3,17 +3,18 @@ package com.institute.iitManage.controller;
 import com.institute.iitManage.db.Database;
 import com.institute.iitManage.model.Teacher;
 import com.institute.iitManage.model.Tm.TeacherTm;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.Window;
+
+import java.util.Optional;
 
 public class TeacherFormController {
     public AnchorPane context;
@@ -27,9 +28,11 @@ public class TeacherFormController {
     public TableView<TeacherTm> tblTeacher;
     public TableColumn<TeacherTm,String> colTeacherID;
     public TableColumn<TeacherTm,String>  colFullName;
-    public TableColumn<TeacherTm,Integer>  colContact;
+    public TableColumn<TeacherTm,String>  colContact;
     public TableColumn<TeacherTm,String>  colAddress;
     public TableColumn<TeacherTm,Button>  colOption;
+
+    String searchText="";
 
     public void initialize() {
         colTeacherID.setCellValueFactory(new PropertyValueFactory<>("teacherID"));
@@ -39,6 +42,7 @@ public class TeacherFormController {
         colOption.setCellValueFactory(new PropertyValueFactory<>("button"));
 
         generateTeacherId();
+        setTableData(searchText);
 
     }
 
@@ -75,5 +79,36 @@ public class TeacherFormController {
         }else {
             txtTeacherID.setText("T-1");
         }
+    }
+
+    private void setTableData(String name){
+        ObservableList<TeacherTm> oblist = FXCollections.observableArrayList();
+
+        for (Teacher teacher : Database.teacherTable) {
+            if (teacher.getTeacherId().contains(name)) {
+
+                Button button = new Button("Delete");
+
+                oblist.add(new TeacherTm(
+                        teacher.getTeacherId(),
+                        teacher.getName(),
+                        teacher.getContact(),
+                        teacher.getAddress(),
+                        button
+                ));
+
+                button.setOnAction(event -> {
+                    Alert alert =new Alert(Alert.AlertType.CONFIRMATION,"Are you sure...!",ButtonType.YES,ButtonType.NO,ButtonType.YES);
+                    Optional<ButtonType> buttonType = alert.showAndWait();
+
+                    if (buttonType.get().equals(ButtonType.YES)) {
+                        Database.teacherTable.remove(teacher);
+                        new Alert(Alert.AlertType.CONFIRMATION,"Teacher has been Deleted!").show();
+                        setTableData(searchText);
+                    }
+                });
+            }
+        }
+
     }
 }
