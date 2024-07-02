@@ -56,5 +56,6 @@ public class Course {
 
     public void setCost(double cost) {
         this.cost = cost;
+//        for(String lang : languages){
     }
 }
