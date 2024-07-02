@@ -1,5 +1,8 @@
 package com.institute.iitManage.controller;
 
+import com.institute.iitManage.db.Database;
+import com.institute.iitManage.model.Teacher;
+import com.institute.iitManage.model.Tm.TeacherTm;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -7,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.Window;
@@ -20,13 +24,23 @@ public class TeacherFormController {
     public TextField txtSearch;
     public TextField txtContact;
 
-    public TableView tblTeacher;
-    public TableColumn colTeacherID;
-    public TableColumn colFullName;
-    public TableColumn colContact;
-    public TableColumn colAddress;
-    public TableColumn colOption;
+    public TableView<TeacherTm> tblTeacher;
+    public TableColumn<TeacherTm,String> colTeacherID;
+    public TableColumn<TeacherTm,String>  colFullName;
+    public TableColumn<TeacherTm,Integer>  colContact;
+    public TableColumn<TeacherTm,String>  colAddress;
+    public TableColumn<TeacherTm,Button>  colOption;
 
+    public void initialize() {
+        colTeacherID.setCellValueFactory(new PropertyValueFactory<>("teacherID"));
+        colFullName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        colContact.setCellValueFactory(new PropertyValueFactory<>("contact"));
+        colAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
+        colOption.setCellValueFactory(new PropertyValueFactory<>("button"));
+
+        generateTeacherId();
+
+    }
 
     public void backToHomeOnAction(ActionEvent actionEvent) throws Exception {
         setUi("DashBoard");
@@ -43,5 +57,23 @@ public class TeacherFormController {
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/"+location+".fxml"))));
         stage.show();
         stage.centerOnScreen();
+    }
+
+    private void generateTeacherId(){
+
+        if(!Database.teacherTable.isEmpty()){
+
+            Teacher lastTeacher = Database.teacherTable.get(Database.teacherTable.size()-1);
+            String stringId = lastTeacher.getTeacherId();
+            String[] split=stringId.split("-");
+            String lastIdAsString = split[1];
+            int lastIdAsInteger = Integer.parseInt(lastIdAsString);
+            lastIdAsInteger++;
+            String newId = "T-"+lastIdAsInteger;
+            txtTeacherID.setText(newId);
+
+        }else {
+            txtTeacherID.setText("T-1");
+        }
     }
 }

@@ -4,12 +4,12 @@ public class Teacher {
     private String teacherId;
     private String name;
     private String address;
-    private String contact;
+    private int contact;
 
     public Teacher() {
     }
 
-    public Teacher(String teacherId, String name, String address, String contact) {
+    public Teacher(String teacherId, String name, String address, int contact) {
         this.teacherId = teacherId;
         this.name = name;
         this.address = address;
@@ -40,11 +40,11 @@ public class Teacher {
         this.address = address;
     }
 
-    public String getContact() {
+    public int getContact() {
         return contact;
     }
 
-    public void setContact(String contact) {
+    public void setContact(int contact) {
         this.contact = contact;
     }
 }
