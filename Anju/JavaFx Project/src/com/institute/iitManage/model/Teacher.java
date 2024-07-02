@@ -47,4 +47,14 @@ public class Teacher {
     public void setContact(String contact) {
         this.contact = contact;
     }
+
+    @Override
+    public String toString() {
+        return "Teacher{" +
+                "teacherId='" + teacherId + '\'' +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", contact='" + contact + '\'' +
+                '}';
+    }
 }

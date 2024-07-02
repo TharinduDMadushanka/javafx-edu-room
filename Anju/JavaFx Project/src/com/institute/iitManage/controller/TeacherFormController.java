@@ -3,7 +3,6 @@ package com.institute.iitManage.controller;
 import com.institute.iitManage.db.Database;
 import com.institute.iitManage.model.Teacher;
 import com.institute.iitManage.model.Tm.TeacherTm;
-import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -13,7 +12,6 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 
 import java.util.Optional;
 
@@ -27,25 +25,25 @@ public class TeacherFormController {
     public TextField txtContact;
 
     public TableView<TeacherTm> tblTeacher;
-    public TableColumn<TeacherTm,String> colTeacherID;
-    public TableColumn<TeacherTm,String>  colFullName;
-    public TableColumn<TeacherTm,String>  colContact;
-    public TableColumn<TeacherTm,String>  colAddress;
-    public TableColumn<TeacherTm,Button>  colOption;
+    public TableColumn<TeacherTm, String> colTeacherID;
+    public TableColumn<TeacherTm, String> colFullName;
+    public TableColumn<TeacherTm, String> colAddress;
+    public TableColumn<TeacherTm, String> colContact;
+    public TableColumn<TeacherTm, Button> colOption;
 
-    String searchText="";
+    String searchText = "";
 
     public void initialize() {
-        colTeacherID.setCellValueFactory(new PropertyValueFactory<>("teacherID"));
+        colTeacherID.setCellValueFactory(new PropertyValueFactory<>("teacherId"));
         colFullName.setCellValueFactory(new PropertyValueFactory<>("name"));
-        colContact.setCellValueFactory(new PropertyValueFactory<>("contact"));
         colAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
+        colContact.setCellValueFactory(new PropertyValueFactory<>("contact"));
         colOption.setCellValueFactory(new PropertyValueFactory<>("button"));
 
         generateTeacherId();
         setTableData(searchText);
 
-        tblTeacher.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) ->{
+        tblTeacher.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 setTableDataValue(newValue);
             }
@@ -55,7 +53,6 @@ public class TeacherFormController {
             searchText = newValue;
             setTableData(searchText);
         });
-
     }
 
     public void backToHomeOnAction(ActionEvent actionEvent) throws Exception {
@@ -63,21 +60,19 @@ public class TeacherFormController {
     }
 
     public void newTeacherOnAction(ActionEvent actionEvent) {
-
         generateTeacherId();
-        setTableData(searchText);
         clear();
         btnSaveTeacher.setText("Save Teacher");
     }
 
     public void saveTeacherOnAction(ActionEvent actionEvent) {
-
         if (btnSaveTeacher.getText().equalsIgnoreCase("Save Teacher")) {
             Teacher teacher = new Teacher(
                     txtTeacherID.getText(),
                     txtFullName.getText(),
-                    txtContact.getText(),
-                    txtAddress.getText()
+                    txtAddress.getText(),
+                    txtContact.getText()
+
             );
 
             Database.teacherTable.add(teacher);
@@ -87,14 +82,13 @@ public class TeacherFormController {
             new Alert(Alert.AlertType.INFORMATION, "Teacher has been Saved...!").show();
             System.out.println(teacher.toString());
 
-        }else {
-
-            for(Teacher teacher : Database.teacherTable){
-
-                if (teacher.getTeacherId().equals(txtTeacherID.getText())){
+        } else {
+            for (Teacher teacher : Database.teacherTable) {
+                if (teacher.getTeacherId().equals(txtTeacherID.getText())) {
                     teacher.setName(txtFullName.getText());
-                    teacher.setContact(txtContact.getText());
                     teacher.setAddress(txtAddress.getText());
+                    teacher.setContact(txtContact.getText());
+
 
                     setTableData(searchText);
                     generateTeacherId();
@@ -107,69 +101,66 @@ public class TeacherFormController {
         }
     }
 
-    private void setUi(String location)throws Exception {
+    private void setUi(String location) throws Exception {
         Stage stage = (Stage) context.getScene().getWindow();
-        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/"+location+".fxml"))));
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/" + location + ".fxml"))));
         stage.show();
         stage.centerOnScreen();
     }
 
-    private void generateTeacherId(){
-
-        if(!Database.teacherTable.isEmpty()){
-
-            Teacher lastTeacher = Database.teacherTable.get(Database.teacherTable.size()-1);
+    private void generateTeacherId() {
+        if (!Database.teacherTable.isEmpty()) {
+            Teacher lastTeacher = Database.teacherTable.get(Database.teacherTable.size() - 1);
             String stringId = lastTeacher.getTeacherId();
-            String[] split=stringId.split("-");
+            String[] split = stringId.split("-");
             String lastIdAsString = split[1];
             int lastIdAsInteger = Integer.parseInt(lastIdAsString);
             lastIdAsInteger++;
-            String newId = "T-"+lastIdAsInteger;
+            String newId = "T-" + lastIdAsInteger;
             txtTeacherID.setText(newId);
-
-        }else {
+        } else {
             txtTeacherID.setText("T-1");
         }
     }
 
-    private void setTableData(String name){
+    private void setTableData(String name) {
         ObservableList<TeacherTm> oblist = FXCollections.observableArrayList();
 
         for (Teacher teacher : Database.teacherTable) {
-            if (teacher.getTeacherId().contains(name)) {
+            if (teacher.getTeacherId().contains(name)){
 
                 Button button = new Button("Delete");
 
                 oblist.add(new TeacherTm(
                         teacher.getTeacherId(),
                         teacher.getName(),
-                        teacher.getContact(),
                         teacher.getAddress(),
+                        teacher.getContact(),
                         button
                 ));
 
                 button.setOnAction(event -> {
-                    Alert alert =new Alert(Alert.AlertType.CONFIRMATION,"Are you sure...!",ButtonType.YES,ButtonType.NO,ButtonType.YES);
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure...!", ButtonType.YES, ButtonType.NO, ButtonType.YES);
                     Optional<ButtonType> buttonType = alert.showAndWait();
 
                     if (buttonType.get().equals(ButtonType.YES)) {
                         Database.teacherTable.remove(teacher);
-                        new Alert(Alert.AlertType.CONFIRMATION,"Teacher has been Deleted!").show();
+                        new Alert(Alert.AlertType.CONFIRMATION, "Teacher has been Deleted!").show();
                         setTableData(searchText);
                     }
                 });
             }
         }
+        tblTeacher.setItems(oblist);
     }
 
-    private void clear(){
-
+    private void clear() {
         txtFullName.clear();
         txtAddress.clear();
         txtContact.clear();
     }
 
-    private void setTableDataValue(TeacherTm teacher){
+    private void setTableDataValue(TeacherTm teacher) {
         txtTeacherID.setText(teacher.getTeacherId());
         txtFullName.setText(teacher.getName());
         txtAddress.setText(teacher.getAddress());
