@@ -51,6 +51,11 @@ public class TeacherFormController {
     }
 
     public void newTeacherOnAction(ActionEvent actionEvent) {
+
+        generateTeacherId();
+        setTableData(searchText);
+        clear();
+        btnSaveTeacher.setText("Save Teacher");
     }
 
     public void saveTeacherOnAction(ActionEvent actionEvent) {
