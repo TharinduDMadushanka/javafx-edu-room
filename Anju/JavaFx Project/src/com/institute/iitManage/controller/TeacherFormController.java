@@ -3,6 +3,7 @@ package com.institute.iitManage.controller;
 import com.institute.iitManage.db.Database;
 import com.institute.iitManage.model.Teacher;
 import com.institute.iitManage.model.Tm.TeacherTm;
+import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -43,6 +44,17 @@ public class TeacherFormController {
 
         generateTeacherId();
         setTableData(searchText);
+
+        tblTeacher.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) ->{
+            if (newValue != null) {
+                setTableDataValue(newValue);
+            }
+        });
+
+        txtSearch.textProperty().addListener((observable, oldValue, newValue) -> {
+            searchText = newValue;
+            setTableData(searchText);
+        });
 
     }
 
