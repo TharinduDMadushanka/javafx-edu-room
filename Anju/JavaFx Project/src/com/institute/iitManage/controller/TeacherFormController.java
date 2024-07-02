@@ -18,13 +18,15 @@ public class TeacherFormController {
     public TextField txtAddress;
     public Button btnSaveTeacher;
     public TextField txtSearch;
+    public TextField txtContact;
+
     public TableView tblTeacher;
     public TableColumn colTeacherID;
     public TableColumn colFullName;
     public TableColumn colContact;
     public TableColumn colAddress;
     public TableColumn colOption;
-    public TextField txtContact;
+
 
     public void backToHomeOnAction(ActionEvent actionEvent) throws Exception {
         setUi("DashBoard");
