@@ -109,6 +109,12 @@ public class TeacherFormController {
                 });
             }
         }
+    }
 
+    private void clear(){
+
+        txtFullName.clear();
+        txtAddress.clear();
+        txtContact.clear();
     }
 }
