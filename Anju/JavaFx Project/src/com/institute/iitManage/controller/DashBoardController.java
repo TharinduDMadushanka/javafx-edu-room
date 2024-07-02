@@ -18,7 +18,8 @@ public class DashBoardController {
         setUI("StudentForm");
     }
 
-    public void teacherOnAction(ActionEvent actionEvent) {
+    public void teacherOnAction(ActionEvent actionEvent) throws IOException {
+        setUI("TeacherForm");
     }
 
     public void intakeOnAction(ActionEvent actionEvent) {

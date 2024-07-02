@@ -15,8 +15,8 @@ public class Database {
         userTable.add(new User(
                 "Amal",
                 "Perera",
-                "amal@gmail.com",
-                new PasswordManager().encrypt("1234")
+                "a",
+                new PasswordManager().encrypt("1")
         ));
     }
 }
