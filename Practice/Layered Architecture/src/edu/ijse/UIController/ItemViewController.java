@@ -55,7 +55,7 @@ public class ItemViewController {
                 itemList.add(item);
                 itemTable.refresh();
                 clearFields();
-                new Alert(Alert.AlertType.INFORMATION, "Item Saved").showAndWait();
+                new Alert(Alert.AlertType.INFORMATION, "Item Saved...!").showAndWait();
             }
         }catch (Exception e) {
             e.printStackTrace();
@@ -65,9 +65,38 @@ public class ItemViewController {
     }
 
     public void updateOnAction(ActionEvent actionEvent) {
+        ItemDto item = new ItemDto(
+                txtCode.getText(),
+                txtDescription.getText(),
+                txtPackSize.getText(),
+                Integer.parseInt(txtQoh.getText()),
+                Double.parseDouble(txtUnitPrice.getText())
+        );
+
+        try{
+            String result = itemService.update(item);
+            if ("Success".equals(result)) {
+                loadItem();
+                clearFields();
+                new Alert(Alert.AlertType.INFORMATION, "Item updated...!").showAndWait();
+            }
+        }catch (Exception e) {
+            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, "Error in Update...!").show();
+        }
     }
 
     public void deleteOnAction(ActionEvent actionEvent) {
+        try{
+            String result = itemService.delete(txtCode.getText());
+            if ("Success".equals(result)) {
+                loadItem();
+                clearFields();
+            }
+        }catch (Exception e) {
+            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, "Error in Delete...!").show();
+        }
     }
 
     private void loadItem(){
@@ -89,4 +118,6 @@ public class ItemViewController {
         txtQoh.clear();
         txtUnitPrice.clear();
     }
+
+
 }
