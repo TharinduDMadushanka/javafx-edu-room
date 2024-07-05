@@ -1,4 +1,7 @@
 package edu.ijse.dao.custom;
 
-public interface ItemDao {
+import edu.ijse.dao.CrudDao;
+import edu.ijse.entity.ItemEntity;
+
+public interface ItemDao extends CrudDao<ItemEntity, String> {
 }
