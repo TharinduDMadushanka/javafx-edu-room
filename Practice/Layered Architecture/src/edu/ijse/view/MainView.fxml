@@ -5,8 +5,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="520.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ijse.UIController.MainViewController">
+<AnchorPane fx:id="context" prefHeight="520.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ijse.UIController.MainViewController">
    <children>
       <Label layoutX="134.0" layoutY="36.0" text="SUPERMARKET MANAGEMENT SYSTEM">
          <font>
