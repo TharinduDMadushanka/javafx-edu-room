@@ -38,6 +38,9 @@ public class ItemViewController {
         colUnitPrice.setCellValueFactory(new PropertyValueFactory<>("unitPrice"));
 
         loadItem();
+
+        // Add listener to the table selection
+        itemTable.setOnMouseClicked(this::selectValue);
     }
 
     public void saveOnAction(ActionEvent actionEvent) {
