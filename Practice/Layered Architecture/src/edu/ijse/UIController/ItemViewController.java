@@ -10,6 +10,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 
 import java.util.ArrayList;
 
@@ -119,5 +120,14 @@ public class ItemViewController {
         txtUnitPrice.clear();
     }
 
-
+    private void selectValue(MouseEvent mouseEvent) {
+        ItemDto selectItem = itemTable.getSelectionModel().getSelectedItem();
+        if (selectItem != null) {
+            txtCode.setText(selectItem.getItemCode());
+            txtDescription.setText(selectItem.getDescription());
+            txtPackSize.setText(selectItem.getPack());
+            txtQoh.setText(String.valueOf(selectItem.getQoh()));
+            txtUnitPrice.setText(String.valueOf(selectItem.getUnitPrice()));
+        }
+    }
 }
