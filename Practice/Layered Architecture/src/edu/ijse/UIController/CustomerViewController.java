@@ -5,6 +5,7 @@ import edu.ijse.service.custom.impl.CustomerServiceImpl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -53,6 +54,30 @@ public class CustomerViewController {
     }
 
     public void saveOnAction(ActionEvent actionEvent) {
+        CustomerDto customer = new CustomerDto(
+                txtId.getText(),
+                txtTitle.getText(),
+                txtName.getText(),
+                txtDob.getText(),
+                Double.parseDouble(txtSalary.getText()),
+                txtAddress.getText(),
+                txtCity.getText(),
+                txtProvince.getText(),
+                txtPostal.getText()
+        );
+
+        try {
+            String result = customerService.save(customer);
+            if (result.equals("Success")) {
+                customerList.add(customer);
+                customerTable.refresh();
+                new Alert(Alert.AlertType.INFORMATION, "Customer Saved...!").showAndWait();
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, "Customer Save Failed...").showAndWait();
+        }
+
     }
 
     public void updateOnAction(ActionEvent actionEvent) {
@@ -66,6 +91,7 @@ public class CustomerViewController {
         txtTitle.clear();
         txtName.clear();
         txtDob.clear();
+        txtSalary.clear();
         txtAddress.clear();
         txtCity.clear();
         txtProvince.clear();
