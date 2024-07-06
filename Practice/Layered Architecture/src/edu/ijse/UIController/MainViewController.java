@@ -16,7 +16,8 @@ public class MainViewController {
         setUI("ItemView");
     }
 
-    public void customerOnAction(ActionEvent actionEvent) {
+    public void customerOnAction(ActionEvent actionEvent) throws IOException {
+        setUI("CustomerView");
     }
 
     public void orderOnAction(ActionEvent actionEvent) {
