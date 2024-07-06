@@ -62,6 +62,14 @@ public class CustomerViewController {
     }
 
     public void clearOnAction(ActionEvent actionEvent) {
+        txtId.clear();
+        txtTitle.clear();
+        txtName.clear();
+        txtDob.clear();
+        txtAddress.clear();
+        txtCity.clear();
+        txtProvince.clear();
+        txtPostal.clear();
     }
 
     private void loadTable(){
