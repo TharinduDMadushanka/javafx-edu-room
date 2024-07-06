@@ -12,6 +12,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 public class CustomerViewController {
@@ -57,11 +60,21 @@ public class CustomerViewController {
     }
 
     public void saveOnAction(ActionEvent actionEvent) {
+        String dobString = txtDob.getText();
+        LocalDate dob;
+
+        try {
+            dob = LocalDate.parse(dobString, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        } catch (DateTimeParseException e) {
+            new Alert(Alert.AlertType.ERROR, "Invalid date format. Please use yyyy-MM-dd.").show();
+            return;
+        }
+
         CustomerDto customer = new CustomerDto(
                 txtId.getText(),
                 txtTitle.getText(),
                 txtName.getText(),
-                txtDob.getText(),
+                dobString,
                 Double.parseDouble(txtSalary.getText()),
                 txtAddress.getText(),
                 txtCity.getText(),
