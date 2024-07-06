@@ -11,13 +11,13 @@ public class CustomerDaoImpl implements CustomerDao {
     @Override
     public boolean create(CustomerEntity t) throws Exception {
         return CrudUtil.executeUpdate("INSERT INTO customer VALUES(?,?,?,?,?,?,?,?,?)",
-                t.getId(),t.getTitle(),t.getName(),t.getDob(),t.getSalary(),t.getAddress(),t.getCity(),t.getProvince(),t.getPostal());
+                t.getId(), t.getTitle(), t.getName(), t.getDob(), t.getSalary(), t.getAddress(), t.getCity(), t.getProvince(), t.getPostal());
     }
 
     @Override
     public boolean update(CustomerEntity t) throws Exception {
         return CrudUtil.executeUpdate("UPDATE customer SET CustTitle=?,CustName=?,DOB=?,salary=?,CustAddress=?,City=?,Province=?,PostalCode=? WHERE CustID = ?",
-                t.getTitle(),t.getName(),t.getDob(),t.getSalary(),t.getAddress(),t.getCity(),t.getProvince(),t.getPostal(),t.getId());
+                t.getTitle(), t.getName(), t.getDob(), t.getSalary(), t.getAddress(), t.getCity(), t.getProvince(), t.getPostal(), t.getId());
     }
 
     @Override
@@ -28,7 +28,7 @@ public class CustomerDaoImpl implements CustomerDao {
     @Override
     public CustomerEntity get(String id) throws Exception {
         ResultSet rst = CrudUtil.executeQuery("SELECT * FROM customer WHERE CustID = ?", id);
-        if(rst.next()){
+        if (rst.next()) {
             CustomerEntity customerEntity = new CustomerEntity(
                     rst.getString("CustID"),
                     rst.getString("CustTitle"),
@@ -49,7 +49,7 @@ public class CustomerDaoImpl implements CustomerDao {
         ArrayList<CustomerEntity> customerEntitys = new ArrayList<>();
         ResultSet rst = CrudUtil.executeQuery("SELECT * FROM customer");
 
-        while(rst.next()){
+        while (rst.next()) {
             CustomerEntity entity = new CustomerEntity(
                     rst.getString("CustID"),
                     rst.getString("CustTitle"),
@@ -64,6 +64,5 @@ public class CustomerDaoImpl implements CustomerDao {
             customerEntitys.add(entity);
         }
         return customerEntitys;
-    }
     }
 }
