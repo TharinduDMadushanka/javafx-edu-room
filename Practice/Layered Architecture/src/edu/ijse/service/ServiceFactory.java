@@ -1,6 +1,7 @@
 package edu.ijse.service;
 
 import edu.ijse.service.custom.ItemService;
+import edu.ijse.service.custom.impl.CustomerServiceImpl;
 import edu.ijse.service.custom.impl.ItemServiceImpl;
 
 public class ServiceFactory {
@@ -19,12 +20,15 @@ public class ServiceFactory {
         switch (type) {
             case ITEM:
                 return new ItemServiceImpl();
+            case CUSTOMER:
+                return new CustomerServiceImpl();
             default:
                 return null;
         }
     }
 
     public enum ServiceType {
-        ITEM
+        ITEM,
+        CUSTOMER
     }
 }
