@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="txtCustomerId" prefHeight="551.0" prefWidth="775.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ijse.UIController.OrderViewController">
+<AnchorPane prefHeight="551.0" prefWidth="775.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ijse.UIController.OrderViewController">
    <children>
       <Label layoutX="314.0" layoutY="14.0" text="Place Order">
          <font>
@@ -27,7 +27,7 @@
             <Font name="Arial Bold" size="16.0" />
          </font>
       </Label>
-      <TextField layoutX="126.0" layoutY="122.0" />
+      <TextField fx:id="txtCustomerIdInput" layoutX="126.0" layoutY="122.0" />
       <Separator layoutX="14.0" layoutY="169.0" prefHeight="5.0" prefWidth="750.0" />
       <Button layoutX="325.0" layoutY="121.0" mnemonicParsing="false" onAction="#customerSearchOnAction" text="Search">
          <font>
@@ -65,11 +65,11 @@
          </font>
       </Button>
       <TableView fx:id="tblOrder" layoutX="22.0" layoutY="276.0" prefHeight="201.0" prefWidth="734.0">
-        <columns>
-          <TableColumn fx:id="colItemCode" prefWidth="236.79996871948242" text="Item Code" />
-          <TableColumn fx:id="colQty" prefWidth="249.60003662109375" text="Qty" />
+         <columns>
+            <TableColumn fx:id="colItemCode" prefWidth="236.79996871948242" text="Item Code" />
+            <TableColumn fx:id="colQty" prefWidth="249.60003662109375" text="Qty" />
             <TableColumn fx:id="colDiscount" prefWidth="248.79998779296875" text="Discount" />
-        </columns>
+         </columns>
       </TableView>
       <Button layoutX="633.0" layoutY="500.0" mnemonicParsing="false" onAction="#placeOrderOnAction" prefHeight="39.0" prefWidth="122.0" text="Place Order">
          <font>
