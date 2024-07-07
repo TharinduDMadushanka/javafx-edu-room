@@ -62,4 +62,8 @@ public class LoginFormController {
         stage.show();
         stage.centerOnScreen();
     }
+
+    public void forgotPasswordOnAction(ActionEvent actionEvent) throws IOException {
+        setUI("ForgotPasswordForm");
+    }
 }
