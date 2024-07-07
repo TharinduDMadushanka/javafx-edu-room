@@ -9,7 +9,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane fx:id="txtCustomerId" prefHeight="551.0" prefWidth="775.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ijse.UIController.OrderViewController">
    <children>
       <Label layoutX="314.0" layoutY="14.0" text="Place Order">
@@ -30,19 +29,19 @@
       </Label>
       <TextField layoutX="126.0" layoutY="122.0" />
       <Separator layoutX="14.0" layoutY="169.0" prefHeight="5.0" prefWidth="750.0" />
-      <Button layoutX="290.0" layoutY="121.0" mnemonicParsing="false" onAction="#customerSearchOnAction" text="Search">
+      <Button layoutX="325.0" layoutY="121.0" mnemonicParsing="false" onAction="#customerSearchOnAction" text="Search">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Button>
-      <TextField fx:id="txtCustomerShow" disable="true" layoutX="373.0" layoutY="122.0" prefHeight="20.0" prefWidth="323.0" />
+      <TextField fx:id="txtCustomerShow" disable="true" layoutX="408.0" layoutY="122.0" prefHeight="20.0" prefWidth="323.0" />
       <Label layoutX="14.0" layoutY="194.0" text="Item ID">
          <font>
             <Font name="Arial Bold" size="16.0" />
          </font>
       </Label>
       <TextField fx:id="txtItemId" layoutX="91.0" layoutY="194.0" />
-      <Button layoutX="255.0" layoutY="190.0" mnemonicParsing="false" onAction="#itemSearchOnAction" text="Search">
+      <Button layoutX="297.0" layoutY="190.0" mnemonicParsing="false" onAction="#itemSearchOnAction" text="Search">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
@@ -53,14 +52,14 @@
          </font>
       </Label>
       <TextField fx:id="txtDiscount" layoutX="91.0" layoutY="235.0" />
-      <TextField fx:id="txtItemShow" disable="true" layoutX="338.0" layoutY="191.0" prefHeight="20.0" prefWidth="323.0" />
-      <Label layoutX="255.0" layoutY="235.0" text="Qty">
+      <TextField fx:id="txtItemShow" disable="true" layoutX="380.0" layoutY="191.0" prefHeight="20.0" prefWidth="323.0" />
+      <Label layoutX="290.0" layoutY="238.0" text="Qty">
          <font>
             <Font name="Arial Bold" size="16.0" />
          </font>
       </Label>
-      <TextField fx:id="txtQty" layoutX="298.0" layoutY="235.0" />
-      <Button layoutX="461.0" layoutY="234.0" mnemonicParsing="false" onAction="#itemAddOnAction" text="Add">
+      <TextField fx:id="txtQty" layoutX="338.0" layoutY="235.0" />
+      <Button layoutX="500.0" layoutY="234.0" mnemonicParsing="false" onAction="#itemAddOnAction" text="Add">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
