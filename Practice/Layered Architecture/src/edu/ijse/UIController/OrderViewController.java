@@ -43,6 +43,8 @@ public class OrderViewController {
         colItemCode.setCellValueFactory(new PropertyValueFactory<>("itemCode"));
         colQty.setCellValueFactory(new PropertyValueFactory<>("qty"));
         colDiscount.setCellValueFactory(new PropertyValueFactory<>("discount"));
+
+        tblOrder.setItems(orderDetails);
     }
 
     public void customerSearchOnAction(ActionEvent actionEvent) {
