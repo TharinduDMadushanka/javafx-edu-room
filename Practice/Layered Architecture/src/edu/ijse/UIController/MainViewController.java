@@ -20,8 +20,8 @@ public class MainViewController {
         setUI("CustomerView");
     }
 
-    public void orderOnAction(ActionEvent actionEvent) {
-
+    public void orderOnAction(ActionEvent actionEvent) throws IOException {
+        setUI("OrderView");
     }
 
     private void setUI(String location) throws IOException {
