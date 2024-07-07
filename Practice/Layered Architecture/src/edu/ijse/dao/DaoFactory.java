@@ -2,6 +2,8 @@ package edu.ijse.dao;
 
 import edu.ijse.dao.custom.impl.CustomerDaoImpl;
 import edu.ijse.dao.custom.impl.ItemDaoImpl;
+import edu.ijse.dao.custom.impl.OrderDaoImpl;
+import edu.ijse.dao.custom.impl.OrderDetailDaoImpl;
 
 public class DaoFactory {
     private static DaoFactory daoFactory;
@@ -20,6 +22,10 @@ public class DaoFactory {
                 return new ItemDaoImpl();
             case CUSTOMER:
                 return new CustomerDaoImpl();
+            case ORDER:
+                return new OrderDaoImpl();
+            case ORDER_DETAIL:
+                return new OrderDetailDaoImpl();
             default:
                 return null;
         }
@@ -27,6 +33,8 @@ public class DaoFactory {
 
     public enum DaoType{
         ITEM,
-        CUSTOMER
+        CUSTOMER,
+        ORDER,
+        ORDER_DETAIL
     }
 }
