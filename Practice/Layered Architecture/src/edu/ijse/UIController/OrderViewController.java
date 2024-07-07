@@ -17,6 +17,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+
 public class OrderViewController {
     public AnchorPane rootPane;
     public TextField txtOrderId;
@@ -99,6 +102,26 @@ public class OrderViewController {
     }
 
     public void placeOrderOnAction(ActionEvent actionEvent) {
+        try {
 
+            String orderId = txtOrderId.getText();
+            String customerId = txtCustomerIdInput.getText();
+            String date = LocalDate.now().toString();
+
+            ArrayList<OrderDetailDto> orderDetailList = new ArrayList<>(orderDetails);
+
+            OrderDto order = new OrderDto(orderId,customerId,date,orderDetailList);
+            String result = orderService.placeOrder(order);
+
+            if(result != null){
+                new Alert(Alert.AlertType.INFORMATION,"Successfully placed order!").show();
+            }else {
+                new Alert(Alert.AlertType.INFORMATION,"Failed to place order!").show();
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+            new Alert(Alert.AlertType.INFORMATION,"Failed to add order!").show();
+        }
     }
 }
