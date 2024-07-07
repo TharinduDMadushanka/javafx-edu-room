@@ -1,6 +1,7 @@
 package edu.ijse.UIController;
 
 import edu.ijse.dto.CustomerDto;
+import edu.ijse.dto.ItemDto;
 import edu.ijse.dto.OrderDetailDto;
 import edu.ijse.dto.OrderDto;
 import edu.ijse.service.custom.impl.CustomerServiceImpl;
@@ -57,6 +58,20 @@ public class OrderViewController {
     }
 
     public void itemSearchOnAction(ActionEvent actionEvent) {
+        try {
+
+            String itemId = txtItemId.getText();
+            ItemDto item = itemService.get(itemId);
+
+            if(item != null){
+                txtItemShow.setText(item.getDescription());
+            }else {
+                txtItemShow.setText("Item not fount!");
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     public void itemAddOnAction(ActionEvent actionEvent) {
