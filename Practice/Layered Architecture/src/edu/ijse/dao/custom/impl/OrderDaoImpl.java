@@ -1,5 +1,6 @@
 package edu.ijse.dao.custom.impl;
 
+import edu.ijse.dao.CrudUtil;
 import edu.ijse.dao.custom.OrderDao;
 import edu.ijse.entity.OrderEntity;
 
@@ -7,8 +8,8 @@ import java.util.ArrayList;
 
 public class OrderDaoImpl implements OrderDao {
     @Override
-    public boolean create(OrderEntity orderEntity) throws Exception {
-        return false;
+    public boolean create(OrderEntity t) throws Exception {
+        return CrudUtil.executeUpdate("INSERT INTO Orders VALUES(?,?,?)",t.getOrderId(),t.getDate(),t.getCustId());
     }
 
     @Override
