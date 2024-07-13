@@ -1,2 +1,4 @@
-package Style;public class MainFormController {
+package Style;
+
+public class MainFormController {
 }
