@@ -50,7 +50,7 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </TextField>
-      <Button fx:id="addTechnologyOnAction" layoutX="563.0" layoutY="123.0" mnemonicParsing="false" onAction="#saveStudentOnAction" prefHeight="30.0" prefWidth="168.0" style="-fx-background-color: #35A8ED;" text="+ Add Technology" textFill="#f2f0f0">
+      <Button layoutX="563.0" layoutY="123.0" mnemonicParsing="false" onAction="#addTechnologyOnAction" prefHeight="30.0" prefWidth="168.0" style="-fx-background-color: #35A8ED;" text="+ Add Technology" textFill="#f2f0f0">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
