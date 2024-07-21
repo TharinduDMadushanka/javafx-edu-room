@@ -75,7 +75,7 @@ public class SignupFormController {
                 "jdbc:mysql://localhost:3306/iitmanage", "root", "Thariya920@");
 
         String sql = "INSERT INTO user VALUE ('" + user.getEmail() + "','" + user.getFirstName() +
-                "','" + user.getLastName() + "','" + user.getPassword() + "')";
+                "','" + user.getLastName() + "','" + new PasswordManager().encrypt(user.getPassword()) + "')";
 
         Statement statement = connection.createStatement();
 
