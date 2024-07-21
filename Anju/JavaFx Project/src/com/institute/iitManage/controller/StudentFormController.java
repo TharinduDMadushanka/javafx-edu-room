@@ -14,10 +14,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -109,11 +106,11 @@ public class StudentFormController {
             }
 
             Database.studentTable.add(student);
-            genarateStudentID();
-            clear();
-            setTableData(searchText);
-            new Alert(Alert.AlertType.INFORMATION, "Student has been Saved...!").show();
-            System.out.println(student.toString());
+//            genarateStudentID();
+//            clear();
+//            setTableData(searchText);
+//            new Alert(Alert.AlertType.INFORMATION, "Student has been Saved...!").show();
+//            System.out.println(student.toString());
         } else {
 
             for (Student student : Database.studentTable) {
@@ -224,4 +221,19 @@ public class StudentFormController {
 
     }
 
+    private String getLastId() throws ClassNotFoundException, SQLException {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection connection = DriverManager.getConnection(
+                "jdbc:mysql://localhost:3306/iitmanage", "root", "Thariya920@");
+
+        String sql = "SELECT id FROM student_id ORDER BY CAST(SUBSTRING(student_id,3)AS UNSIGNED) DESC LIMIT 1"; //decending order quary for varchar
+
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        if (resultSet.next()){
+            return  resultSet.getString(1);
+        }
+        return null;
+    }
 }
