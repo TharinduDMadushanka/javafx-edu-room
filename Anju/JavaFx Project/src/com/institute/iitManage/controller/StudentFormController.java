@@ -18,7 +18,9 @@ import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 public class StudentFormController {
@@ -39,6 +41,7 @@ public class StudentFormController {
 
 
     String searchText="";
+    private ObservableList<StudentTm> studentList = FXCollections.observableArrayList();
 
     public void initialize() {
 
@@ -247,7 +250,7 @@ public class StudentFormController {
         Connection connection = DriverManager.getConnection(
                 "jdbc:mysql://localhost:3306/iitmanage", "root", "Thariya920@");
 
-        String sql = "SELECT id FROM student_id ORDER BY CAST(SUBSTRING(student_id,3)AS UNSIGNED) DESC LIMIT 1"; //descending order query for varchar
+        String sql = "SELECT student_id FROM student ORDER BY"+" CAST(SUBSTRING(student_id,3)AS UNSIGNED) DESC LIMIT 1"; //descending order query for varchar
 
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         ResultSet resultSet = preparedStatement.executeQuery();
@@ -256,5 +259,34 @@ public class StudentFormController {
             return  resultSet.getString(1);
         }
         return null;
+    }
+
+    private List<Student> searchStudent(String text) throws ClassNotFoundException, SQLException {
+        text = "%"+text+"%"; // give text locate in anywhere
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection connection = DriverManager.getConnection(
+                "jdbc:mysql://localhost:3306/iitmanage", "root", "Thariya920@");
+
+        String sql = "SELECT * FROM student WHERE full_name LIKE ? OR address LIKE ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1, text);
+        preparedStatement.setString(2, text);
+
+        ResultSet resultSet = preparedStatement.executeQuery();
+        List<Student> list = new ArrayList<>();
+        while (resultSet.next()){
+
+            list.add(new Student(
+                    resultSet.getString(1),
+                    resultSet.getString(2),
+                    resultSet.getDate(3),
+                    resultSet.getString(4)
+            ));
+        }
+        return list;
+    }
+
+    public void searchOnAction(ActionEvent actionEvent) {
+
     }
 }

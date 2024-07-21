@@ -11,8 +11,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane fx:id="context" prefHeight="507.0" prefWidth="693.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.institute.iitManage.controller.StudentFormController">
+<AnchorPane fx:id="context" prefHeight="507.0" prefWidth="693.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.institute.iitManage.controller.StudentFormController">
     <children>
         <Label layoutX="26.0" layoutY="18.0" prefHeight="27.0" prefWidth="198.0" text="Student Management" textFill="#35a8ed">
             <font>
@@ -60,7 +59,7 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </Button>
-        <TextField fx:id="txtSearch" alignment="CENTER" layoutX="14.0" layoutY="194.0" prefHeight="30.0" prefWidth="658.0" promptText="Search Studnet">
+        <TextField fx:id="txtSearch" alignment="CENTER" layoutX="14.0" layoutY="194.0" onAction="#searchOnAction" prefHeight="30.0" prefWidth="658.0" promptText="Search Studnet">
             <font>
                 <Font name="System Bold" size="14.0" />
             </font>
