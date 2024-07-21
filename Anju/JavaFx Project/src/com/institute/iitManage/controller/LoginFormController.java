@@ -27,6 +27,26 @@ public class LoginFormController {
         String email = txtEmail.getText().trim().toLowerCase();
         String password = txtPassword.getText().trim();
 
+        //connect login method with mysql database
+
+        try{
+            User user = login(email);
+            if(null != user){
+                if(new PasswordManager().checkPassword(password, user.getPassword())){
+                    setUI("DashBoard");
+                }else {
+                    new Alert(Alert.AlertType.ERROR,"Email or Password Incorrect...!").show();
+                }
+            }else {
+                new Alert(Alert.AlertType.ERROR,"User Not Found...!").show();
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+
         /*for(User user: Database.userTable){
             if(user.getEmail().equals(email)){
                 if(user.getPassword().equals(password)){
@@ -40,16 +60,16 @@ public class LoginFormController {
         }
         new Alert(Alert.AlertType.ERROR,"User Not Found...!");*/
 
-        Optional<User> selectedUser = Database.userTable.stream().filter(e -> e.getEmail().equals(email)).findFirst();
-        if(selectedUser.isPresent()){
-            if (new PasswordManager().checkPassword(password,selectedUser.get().getPassword())){
-                setUI("DashBoard");
-            }else {
-                new Alert(Alert.AlertType.ERROR,"Email or Password Incorrect...!").show();
-            }
-        }else {
-            new Alert(Alert.AlertType.ERROR,"User Not Found...!").show();
-        }
+//        Optional<User> selectedUser = Database.userTable.stream().filter(e -> e.getEmail().equals(email)).findFirst();
+//        if(selectedUser.isPresent()){
+//            if (new PasswordManager().checkPassword(password,selectedUser.get().getPassword())){
+//                setUI("DashBoard");
+//            }else {
+//                new Alert(Alert.AlertType.ERROR,"Email or Password Incorrect...!").show();
+//            }
+//        }else {
+//            new Alert(Alert.AlertType.ERROR,"User Not Found...!").show();
+//        }
 
     }
 
