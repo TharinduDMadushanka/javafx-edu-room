@@ -72,7 +72,7 @@ public class SignupFormController {
         Class.forName("com.mysql.cj.jdbc.Driver");
 
         Connection connection = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/iitmanage", "root", "1234");
+                "jdbc:mysql://localhost:3306/iitmanage", "root", "Thariya920@");
 
         String sql = "INSERT INTO user VALUE ('" + user.getEmail() + "','" + user.getFirstName() +
                 "','" + user.getLastName() + "','" + user.getPassword() + "')";

@@ -13,6 +13,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.*;
 import java.util.Optional;
 
 public class LoginFormController {
@@ -65,5 +66,24 @@ public class LoginFormController {
 
     public void forgotPasswordOnAction(ActionEvent actionEvent) throws IOException {
         setUI("ForgotPasswordForm");
+    }
+
+    private User login(String email) throws ClassNotFoundException, SQLException {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/iitmanage", "root", "Thariya920@");
+        String sql ="SELECT * FROM user WHERE email= '"+email+"'";
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery(sql);
+
+        if(resultSet.next()){
+            User user = new User(
+                    resultSet.getString(1),
+                    resultSet.getString(2),
+                    resultSet.getString(3),
+                    resultSet.getString(4)
+            );
+            return user;
+        }
+        return null;
     }
 }
