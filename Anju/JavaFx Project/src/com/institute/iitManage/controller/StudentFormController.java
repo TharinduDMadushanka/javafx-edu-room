@@ -141,6 +141,7 @@ public class StudentFormController {
 
     private void genarateStudentID() {
 
+        /*
         if (!Database.studentTable.isEmpty()) {
 
             Student lastStudent = Database.studentTable.get(Database.studentTable.size() - 1);
@@ -154,6 +155,26 @@ public class StudentFormController {
 
         } else {
             txtStudentID.setText("S-1");
+        }
+        */
+
+        try {
+
+            String stringId = getLastId();
+
+            if (stringId != null) {
+                String[] split = stringId.split("-");
+                String lastIdAsString = split[1];
+                int lastIdAsInteger = Integer.parseInt(lastIdAsString);
+                lastIdAsInteger++;
+                String newId = "S-" + lastIdAsInteger;
+                txtStudentID.setText(newId);
+            }else {
+                txtStudentID.setText("S-1");
+            }
+
+        }catch (ClassNotFoundException | SQLException e){
+            e.printStackTrace();
         }
 
     }
@@ -226,7 +247,7 @@ public class StudentFormController {
         Connection connection = DriverManager.getConnection(
                 "jdbc:mysql://localhost:3306/iitmanage", "root", "Thariya920@");
 
-        String sql = "SELECT id FROM student_id ORDER BY CAST(SUBSTRING(student_id,3)AS UNSIGNED) DESC LIMIT 1"; //decending order quary for varchar
+        String sql = "SELECT id FROM student_id ORDER BY CAST(SUBSTRING(student_id,3)AS UNSIGNED) DESC LIMIT 1"; //descending order query for varchar
 
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         ResultSet resultSet = preparedStatement.executeQuery();
