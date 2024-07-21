@@ -12,10 +12,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-import java.io.DataInput;
 import java.io.IOException;
-import java.sql.*;
-import java.util.Locale;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 public class SignupFormController {
 
@@ -31,10 +32,7 @@ public class SignupFormController {
         String email = txtEmail.getText().trim().toLowerCase();
         String password = txtPassword.getText().trim();
 
-        /*Database.userTable.add(
-                new User(firstName,lastname,email,new PasswordManager().encrypt(password))
-        );*/
-        User user = new User(firstName,lastname,email, password);
+        User user = new User(firstName, lastname, email, password);
         boolean isSaved = false;
 
         try {
@@ -43,7 +41,7 @@ public class SignupFormController {
                 new Alert(Alert.AlertType.CONFIRMATION, "Your Account has been Created...!").show();
                 setUI("LoginForm");
             } else {
-                new Alert(Alert.AlertType.CONFIRMATION, "Something went wrong, Try again...!").show();
+                new Alert(Alert.AlertType.ERROR, "Something went wrong, Try again...!").show();
             }
         } catch (ClassNotFoundException | SQLException | IOException e) {
             e.printStackTrace();
@@ -62,30 +60,22 @@ public class SignupFormController {
     }
 
     private boolean singup(User user) throws ClassNotFoundException, SQLException {
-
         Class.forName("com.mysql.cj.jdbc.Driver");
 
         Connection connection = DriverManager.getConnection(
                 "jdbc:mysql://localhost:3306/iitmanage", "root", "Thariya920@");
 
-        String sql = "INSERT INTO user VALUE (?,?,?,?)";
+        String sql = "INSERT INTO user (email, first_name, last_name, password) VALUES (?, ?, ?, ?)";
 
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
-
         preparedStatement.setString(1, user.getEmail());
         preparedStatement.setString(2, user.getFirstName());
         preparedStatement.setString(3, user.getLastName());
-        preparedStatement.setString(4,new PasswordManager().encrypt( user.getPassword()));
+        preparedStatement.setString(4, new PasswordManager().encrypt(user.getPassword()));
 
-        return preparedStatement.executeUpdate(sql) > 0;
+        int rowCount = preparedStatement.executeUpdate();
+        connection.close();
 
-       /* int rowCount = statement.executeUpdate(sql);
-
-        if (rowCount > 0) {
-            return true;
-        } else {
-            return false;
-        }*/
-
+        return rowCount > 0;
     }
 }
