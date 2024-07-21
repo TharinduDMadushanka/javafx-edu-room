@@ -14,6 +14,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -184,4 +188,23 @@ public class StudentFormController {
         txtDob.setValue(LocalDate.parse(studentTm.getDob()));
         btnSaveStudnet.setText("Update Student");
     }
+
+    private boolean saveStudent(Student student) throws ClassNotFoundException, SQLException {
+
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection connection = DriverManager.getConnection(
+                "jdbc:mysql://localhost:3306/iitmanage", "root", "Thariya920@");
+
+        String sql = "INSERT INTO student VALUE (?,?,?,?)";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+        preparedStatement.setString(1, student.getId());
+        preparedStatement.setString(2, student.getName());
+        preparedStatement.setObject(3, student.getDob());
+        preparedStatement.setString(4, student.getAddress());
+
+        return preparedStatement.executeUpdate() >0;
+
+    }
+
 }
