@@ -28,8 +28,7 @@ public class SignupFormController {
     public TextField txtLastName;
     public TextField txtEmail;
 
-    public void singupOnAction(ActionEvent actionEvent) throws IOException {
-
+    public void signupOnAction(ActionEvent actionEvent) {
         String firstName = txtFirstName.getText().trim().toLowerCase();
         String lastname = txtLastName.getText().trim().toLowerCase();
         String email = txtEmail.getText().trim().toLowerCase();
@@ -38,7 +37,7 @@ public class SignupFormController {
         /*Database.userTable.add(
                 new User(firstName,lastname,email,new PasswordManager().encrypt(password))
         );*/
-        User user = new User(email, firstName, lastname, password);
+        User user = new User(firstName,lastname,email, password);
         boolean isSaved = false;
 
         try {
@@ -49,14 +48,12 @@ public class SignupFormController {
             } else {
                 new Alert(Alert.AlertType.CONFIRMATION, "Something went wrong, Try again...!").show();
             }
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (ClassNotFoundException | SQLException | IOException e) {
             e.printStackTrace();
         }
-
-
     }
 
-    public void alreadyHaveanAccountOnAction(ActionEvent actionEvent) throws IOException {
+    public void alreadyHaveAccountOnAction(ActionEvent actionEvent) throws IOException {
         setUI("LoginForm");
     }
 
@@ -90,4 +87,6 @@ public class SignupFormController {
 
         return statement.executeUpdate(sql) > 0;
     }
+
+
 }
