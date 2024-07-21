@@ -59,7 +59,7 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </Button>
-        <TextField fx:id="txtSearch" alignment="CENTER" layoutX="14.0" layoutY="194.0" onAction="#searchOnAction" prefHeight="30.0" prefWidth="658.0" promptText="Search Studnet">
+        <TextField fx:id="txtSearch" alignment="CENTER" layoutX="14.0" layoutY="194.0" prefHeight="30.0" prefWidth="658.0" promptText="Search Studnet">
             <font>
                 <Font name="System Bold" size="14.0" />
             </font>

@@ -41,7 +41,7 @@ public class StudentFormController {
 
 
     String searchText="";
-    private ObservableList<StudentTm> studentList = FXCollections.observableArrayList();
+    //private ObservableList<StudentTm> studentList = FXCollections.observableArrayList();
 
     public void initialize() {
 
@@ -191,6 +191,24 @@ public class StudentFormController {
     private void setTableData(String name) {
         ObservableList<StudentTm> oblist = FXCollections.observableArrayList();
 
+        //connect with mqsql database
+
+        try{
+
+            List<Student> studentList = searchStudent(name);
+
+            for (Student student : studentList) {
+                oblist.add(new StudentTm());
+            }
+
+            Button button = new Button("Delete");
+
+
+
+        }catch (ClassNotFoundException | SQLException e){
+            e.printStackTrace();
+        }
+
         for (Student student : Database.studentTable) {
             if (student.getName().contains(name)) {
                 Button button = new Button("Delete");
@@ -286,7 +304,4 @@ public class StudentFormController {
         return list;
     }
 
-    public void searchOnAction(ActionEvent actionEvent) {
-
-    }
 }
