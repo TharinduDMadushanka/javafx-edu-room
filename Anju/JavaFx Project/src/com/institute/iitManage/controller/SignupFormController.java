@@ -14,10 +14,7 @@ import javafx.stage.Stage;
 
 import java.io.DataInput;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.Locale;
 
 public class SignupFormController {
@@ -71,10 +68,16 @@ public class SignupFormController {
         Connection connection = DriverManager.getConnection(
                 "jdbc:mysql://localhost:3306/iitmanage", "root", "Thariya920@");
 
-        String sql = "INSERT INTO user VALUE ('" + user.getEmail() + "','" + user.getFirstName() +
-                "','" + user.getLastName() + "','" + new PasswordManager().encrypt(user.getPassword()) + "')";
+        String sql = "INSERT INTO user VALUE (?,?,?,?)";
 
-        Statement statement = connection.createStatement();
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+        preparedStatement.setString(1, user.getEmail());
+        preparedStatement.setString(2, user.getFirstName());
+        preparedStatement.setString(3, user.getLastName());
+        preparedStatement.setString(4,new PasswordManager().encrypt( user.getPassword()));
+
+        return preparedStatement.executeUpdate(sql) > 0;
 
        /* int rowCount = statement.executeUpdate(sql);
 
@@ -83,10 +86,6 @@ public class SignupFormController {
         } else {
             return false;
         }*/
-        System.out.println("HI");
 
-        return statement.executeUpdate(sql) > 0;
     }
-
-
 }

@@ -92,6 +92,9 @@ public class LoginFormController {
         Class.forName("com.mysql.cj.jdbc.Driver");
         Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/iitmanage", "root", "Thariya920@");
         String sql ="SELECT * FROM user WHERE email= '"+email+"'";
+
+        //System.out.println(sql); // --> inject sql
+
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery(sql);
 
