@@ -91,6 +91,23 @@ public class StudentFormController {
                     txtAddress.getText()
             );
 
+            // connect with mysql database
+
+            try {
+
+                if (saveStudent(student)) {
+                    genarateStudentID();
+                    clear();
+                    setTableData(searchText);
+                    new Alert(Alert.AlertType.INFORMATION, "Student has been Saved...!").show();
+                }else {
+                    new Alert(Alert.AlertType.ERROR,"Something went wrong..!").show();
+                }
+
+            }catch (ClassNotFoundException | SQLException e ){
+                e.printStackTrace();
+            }
+
             Database.studentTable.add(student);
             genarateStudentID();
             clear();
