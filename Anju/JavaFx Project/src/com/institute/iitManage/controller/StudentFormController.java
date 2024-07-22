@@ -193,46 +193,47 @@ public class StudentFormController {
 
         //connect with mqsql database
 
-        try{
-
+        try {
             List<Student> studentList = searchStudent(name);
 
-            for (Student student : studentList) {
-                oblist.add(new StudentTm());
-            }
-
-            Button button = new Button("Delete");
-
-
-
-        }catch (ClassNotFoundException | SQLException e){
-            e.printStackTrace();
-        }
-
-        for (Student student : Database.studentTable) {
-            if (student.getName().contains(name)) {
+            for (Student student:studentList) {
                 Button button = new Button("Delete");
 
                 oblist.add(new StudentTm(
                         student.getId(),
                         student.getName(),
-                        new SimpleDateFormat("yyyy-MM-dd").format(student.getDob()), // Formatting the Date to String
+                        new SimpleDateFormat("yyyy-MM-dd").format(student.getDob()),
                         student.getAddress(),
                         button
                 ));
 
                 button.setOnAction(event -> {
+
                     Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you Sure...?", ButtonType.NO, ButtonType.YES);
                     Optional<ButtonType> buttonType = alert.showAndWait();
 
                     if (buttonType.get().equals(ButtonType.YES)) {
-                        Database.studentTable.remove(student);
-                        new Alert(Alert.AlertType.INFORMATION, "Student has Been Deleted...!").show();
-                        setTableData(searchText);
+                        //Database.studentTable.remove(student);
+
+                        try{
+                            deleteStudent(student.getId());
+                            new Alert(Alert.AlertType.INFORMATION, "Student has Been Deleted...!");
+                            setTableData(searchText);
+
+                        }catch (ClassNotFoundException | SQLException e){
+                            e.printStackTrace();
+                            new Alert(Alert.AlertType.ERROR, "Error deleting student. Please try again.").show();
+                        }
+
                     }
+
                 });
             }
+
+        }catch (ClassNotFoundException | SQLException e){
+            e.printStackTrace();
         }
+
         tblStudent.setItems(oblist);
     }
 
@@ -304,4 +305,14 @@ public class StudentFormController {
         return list;
     }
 
+    private void deleteStudent(String id) throws ClassNotFoundException, SQLException {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection connection = DriverManager.getConnection(
+                "jdbc:mysql://localhost:3306/iitmanage", "root", "Thariya920@");
+
+        String sql = "DELETE FROM student WHERE id = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1, id);
+        preparedStatement.executeUpdate();
+    }
 }
