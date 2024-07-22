@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/JavaFx Project.iml" filepath="$PROJECT_DIR$/JavaFx Project.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Transaction/Transaction.iml" filepath="$PROJECT_DIR$/Transaction/Transaction.iml" />
     </modules>
   </component>
 </project>
