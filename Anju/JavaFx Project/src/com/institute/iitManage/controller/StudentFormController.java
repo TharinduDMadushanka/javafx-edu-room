@@ -105,8 +105,16 @@ public class StudentFormController {
                         new Alert(Alert.AlertType.ERROR, "Something went wrong..!").show();
                     }
                 } else if (btnSaveStudnet.getText().equalsIgnoreCase("Update Student")) {
+
+                    Student student1 = new Student(
+                            txtStudentID.getText(),
+                            txtFullName.getText(),
+                            Date.from(txtDob.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()),
+                            txtAddress.getText()
+                    );
+
                     // Update existing student
-                    if (updateStudent(student)) {
+                    if (updateStudent(student1)) {
                         setTableData(searchText);
                         clear();
                         genarateStudentID();
@@ -230,7 +238,7 @@ public class StudentFormController {
 
                         try {
                             deleteStudent(student.getId());
-                            new Alert(Alert.AlertType.INFORMATION, "Student has Been Deleted...!");
+                            new Alert(Alert.AlertType.INFORMATION, "Student has Been Deleted...!").show();
                             setTableData(searchText);
 
                         } catch (ClassNotFoundException | SQLException e) {
