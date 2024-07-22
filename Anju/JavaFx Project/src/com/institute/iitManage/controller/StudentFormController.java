@@ -1,5 +1,6 @@
 package com.institute.iitManage.controller;
 
+import com.institute.iitManage.db.DBConnection;
 import com.institute.iitManage.db.Database;
 import com.institute.iitManage.model.Student;
 import com.institute.iitManage.model.Tm.StudentTm;
@@ -269,9 +270,11 @@ public class StudentFormController {
 
     private boolean saveStudent(Student student) throws ClassNotFoundException, SQLException {
 
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection connection = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/iitmanage", "root", "Thariya920@");
+//        Class.forName("com.mysql.cj.jdbc.Driver");
+//        Connection connection = DriverManager.getConnection(
+//                "jdbc:mysql://localhost:3306/iitmanage", "root", "Thariya920@");
+
+        Connection connection = DBConnection.getInstance().getConnection();
 
         String sql = "INSERT INTO student VALUE (?,?,?,?)";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -286,9 +289,11 @@ public class StudentFormController {
     }
 
     private String getLastId() throws ClassNotFoundException, SQLException {
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection connection = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/iitmanage", "root", "Thariya920@");
+//        Class.forName("com.mysql.cj.jdbc.Driver");
+//        Connection connection = DriverManager.getConnection(
+//                "jdbc:mysql://localhost:3306/iitmanage", "root", "Thariya920@");
+
+        Connection connection = DBConnection.getInstance().getConnection();
 
         String sql = "SELECT student_id FROM student ORDER BY" + " CAST(SUBSTRING(student_id,3)AS UNSIGNED) DESC LIMIT 1"; //descending order query for varchar
 
@@ -303,9 +308,11 @@ public class StudentFormController {
 
     private List<Student> searchStudent(String text) throws ClassNotFoundException, SQLException {
         text = "%" + text + "%"; // give text locate in anywhere
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection connection = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/iitmanage", "root", "Thariya920@");
+//        Class.forName("com.mysql.cj.jdbc.Driver");
+//        Connection connection = DriverManager.getConnection(
+//                "jdbc:mysql://localhost:3306/iitmanage", "root", "Thariya920@");
+
+        Connection connection = DBConnection.getInstance().getConnection();
 
         String sql = "SELECT * FROM student WHERE full_name LIKE ? OR address LIKE ?";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -327,9 +334,11 @@ public class StudentFormController {
     }
 
     private void deleteStudent(String id) throws ClassNotFoundException, SQLException {
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection connection = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/iitmanage", "root", "Thariya920@");
+//        Class.forName("com.mysql.cj.jdbc.Driver");
+//        Connection connection = DriverManager.getConnection(
+//                "jdbc:mysql://localhost:3306/iitmanage", "root", "Thariya920@");
+
+        Connection connection = DBConnection.getInstance().getConnection();
 
         String sql = "DELETE FROM student WHERE student_id = ?";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -338,9 +347,11 @@ public class StudentFormController {
     }
 
     private boolean updateStudent(Student student) throws ClassNotFoundException, SQLException {
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection connection = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/iitmanage", "root", "Thariya920@");
+//        Class.forName("com.mysql.cj.jdbc.Driver");
+//        Connection connection = DriverManager.getConnection(
+//                "jdbc:mysql://localhost:3306/iitmanage", "root", "Thariya920@");
+
+        Connection connection = DBConnection.getInstance().getConnection();
 
         String sql = "UPDATE student SET full_name = ?, dob = ?, address = ? WHERE student_id = ?";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
