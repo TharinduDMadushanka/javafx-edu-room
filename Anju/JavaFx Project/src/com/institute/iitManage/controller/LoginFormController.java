@@ -1,5 +1,6 @@
 package com.institute.iitManage.controller;
 
+import com.institute.iitManage.db.DBConnection;
 import com.institute.iitManage.model.User;
 import com.institute.iitManage.util.security.PasswordManager;
 import javafx.event.ActionEvent;
@@ -62,8 +63,11 @@ public class LoginFormController {
     }
 
     private User login(String email) throws ClassNotFoundException, SQLException {
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/iitmanage", "root", "Thariya920@");
+//        Class.forName("com.mysql.cj.jdbc.Driver");
+//        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/iitmanage", "root", "Thariya920@");
+
+        Connection connection = DBConnection.getInstance().getConnection();
+
         String sql = "SELECT * FROM user WHERE email = ?";
 
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
