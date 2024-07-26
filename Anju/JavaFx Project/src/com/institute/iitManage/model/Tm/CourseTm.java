@@ -3,47 +3,47 @@ package com.institute.iitManage.model.Tm;
 import javafx.scene.control.Button;
 
 public class CourseTm {
-    private String code;
-    private String name;
-    private String teacher;
+    private String courseId;
+    private String courseName;
+    private String teacherName;
     private Button btnTechList;
     private double cost;
-    private Button btnOption;
+    private Button btnDelete;
 
     public CourseTm() {
     }
 
-    public CourseTm(String code, String name, String teacher, Button btnTechList, double cost, Button btnOption) {
-        this.code = code;
-        this.name = name;
-        this.teacher = teacher;
+    public CourseTm(String courseId, String courseName, String teacherName, Button btnTechList, double cost, Button btnDelete) {
+        this.courseId = courseId;
+        this.courseName = courseName;
+        this.teacherName = teacherName;
         this.btnTechList = btnTechList;
         this.cost = cost;
-        this.btnOption = btnOption;
+        this.btnDelete = btnDelete;
     }
 
-    public String getCode() {
-        return code;
+    public String getCourseId() {
+        return courseId;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setCourseId(String courseId) {
+        this.courseId = courseId;
     }
 
-    public String getName() {
-        return name;
+    public String getCourseName() {
+        return courseName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
     }
 
-    public String getTeacher() {
-        return teacher;
+    public String getTeacherName() {
+        return teacherName;
     }
 
-    public void setTeacher(String teacher) {
-        this.teacher = teacher;
+    public void setTeacherName(String teacherName) {
+        this.teacherName = teacherName;
     }
 
     public Button getBtnTechList() {
@@ -62,11 +62,11 @@ public class CourseTm {
         this.cost = cost;
     }
 
-    public Button getBtnOption() {
-        return btnOption;
+    public Button getBtnDelete() {
+        return btnDelete;
     }
 
-    public void setBtnOption(Button btnOption) {
-        this.btnOption = btnOption;
+    public void setBtnDelete(Button btnDelete) {
+        this.btnDelete = btnDelete;
     }
 }

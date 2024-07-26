@@ -1,8 +1,7 @@
 package com.institute.iitManage.controller;
 
-import com.institute.iitManage.db.Database;
+import com.institute.iitManage.db.DBConnection;
 import com.institute.iitManage.model.Course;
-import com.institute.iitManage.model.Teacher;
 import com.institute.iitManage.model.Tm.CourseTm;
 import com.institute.iitManage.model.Tm.TechnolgiesTm;
 import javafx.collections.FXCollections;
@@ -16,6 +15,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class CourseFormController {
@@ -36,83 +36,59 @@ public class CourseFormController {
     public TableView<CourseTm> tblCourse;
     public TableColumn<CourseTm, String> colCourseId;
     public TableColumn<CourseTm, String> colCourse;
-    public TableColumn<CourseTm, String>  colTechnologyy;
     public TableColumn<CourseTm, String> colTeacher;
+    public TableColumn<CourseTm, Button> colTechOnCourse;
     public TableColumn<CourseTm, Double> colCost;
     public TableColumn<CourseTm, Button> colOption;
-    public TextField txtCourseId;
-    public TableView<CourseTm> technologuTable;
-    public TableColumn<CourseTm, String>  colTechRemove;
-    public TableColumn<CourseTm, String> colTechnology;
-    public ComboBox txtTeacher;
-    public TextField txtTechnology;
-    public TextField txtTechnology1;
-    public TableView<CourseTm>  courseTable;
 
-
-    private ArrayList<String> teachersArray = new ArrayList<>();
-    private ObservableList<TechnolgiesTm> tmList = FXCollections.observableArrayList();
+    ArrayList<String> teachersArray = new ArrayList<>();
+    ObservableList<TechnolgiesTm> tmList = FXCollections.observableArrayList();
 
     public void initialize() {
         generateCourseID();
         setTeachers();
-        loadCourse();
+        loadCourses();
 
-        // Initialize Table Columns
         colTechId.setCellValueFactory(new PropertyValueFactory<>("code"));
         coltech.setCellValueFactory(new PropertyValueFactory<>("name"));
         colRemove.setCellValueFactory(new PropertyValueFactory<>("button"));
 
-        colCourseId.setCellValueFactory(new PropertyValueFactory<>("code"));
-        colCourse.setCellValueFactory(new PropertyValueFactory<>("name"));
-        colTeacher.setCellValueFactory(new PropertyValueFactory<>("teacher"));
-        colTechnologyy.setCellValueFactory(new PropertyValueFactory<>("btnTechList"));
+        colCourseId.setCellValueFactory(new PropertyValueFactory<>("courseId"));
+        colCourse.setCellValueFactory(new PropertyValueFactory<>("courseName"));
+        colTeacher.setCellValueFactory(new PropertyValueFactory<>("teacherName"));
+        colTechOnCourse.setCellValueFactory(new PropertyValueFactory<>("btnTechList"));
         colCost.setCellValueFactory(new PropertyValueFactory<>("cost"));
-        colOption.setCellValueFactory(new PropertyValueFactory<>("btnOption"));
-
-        // Setup table interactions
-        setupTableInteractions();
+        colOption.setCellValueFactory(new PropertyValueFactory<>("btnDelete"));
     }
 
     public void newCourseOnAction(ActionEvent actionEvent) {
-        // Clear fields for new course entry
-        txtCourseID.clear();
-        txtCourseName.clear();
-        txtCost.clear();
-        cmbTeachers.setValue(null);
-        txtTechnologies.clear();
-        tmList.clear();
-        generateCourseID();
+        // Implementation for new course action
     }
 
     public void backToHomeOnAction(ActionEvent actionEvent) throws IOException {
         setUI("Dashboard");
     }
 
-    public void saveSCourseOnAction(ActionEvent actionEvent) {
+    public void addTechOnAction(ActionEvent actionEvent) {
         if (!isExist(txtTechnologies.getText().trim())) {
             Button button = new Button("Remove");
-            button.setOnAction(e -> {
-                TechnolgiesTm tech = (TechnolgiesTm) ((Button) e.getSource()).getUserData();
-                tmList.remove(tech);
-                tblTechnologies.setItems(tmList);
-            });
 
-            TechnolgiesTm techTm = new TechnolgiesTm(
-                    tmList.size() + 1,
-                    txtTechnologies.getText().trim(),
-                    button
+            tmList.add(
+                    new TechnolgiesTm(
+                            tmList.size() + 1,
+                            txtTechnologies.getText().trim(),
+                            button
+                    )
             );
-            tmList.add(techTm);
             tblTechnologies.setItems(tmList);
             txtTechnologies.clear();
         } else {
             txtTechnologies.selectAll();
-            new Alert(Alert.AlertType.INFORMATION, "This technology already exists").show();
+            new Alert(Alert.AlertType.INFORMATION, "This tech already exists").show();
         }
     }
 
-    public void addTechnologyOnAction(ActionEvent actionEvent) {
+    public void saveCourseOnAction(ActionEvent actionEvent) {
         String[] selectedTech = new String[tmList.size()];
         int pointer = 0;
 
@@ -121,58 +97,75 @@ public class CourseFormController {
             pointer++;
         }
 
-        if (btnSave.getText().equalsIgnoreCase("Save Course")) {
-            Course course = new Course(
-                    txtCourseID.getText(),
-                    txtCourseName.getText(),
-                    selectedTech,
-                    cmbTeachers.getValue().split("\\.")[0],
-                    Double.parseDouble(txtCost.getText().trim())
-            );
-            Database.courseTable.add(course);
+        Course course = new Course(
+                txtCourseID.getText(),
+                txtCourseName.getText(),
+                selectedTech,
+                cmbTeachers.getValue().split("\\.")[0],
+                Double.parseDouble(txtCost.getText().trim())
+        );
+
+        try (Connection connection = DBConnection.getInstance().getConnection()) {
+            String query = "INSERT INTO course (course_id, course_name, technologies, teacher_id, cost) VALUES (?, ?, ?, ?, ?)";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, course.getCourseId());  // Changed to match type
+            preparedStatement.setString(2, course.getCourseName());
+            preparedStatement.setString(3, String.join(",", course.getSubjects()));
+            preparedStatement.setString(4, course.getTeacherId());  // Changed to match type
+            preparedStatement.setDouble(5, course.getCost());
+            preparedStatement.executeUpdate();
+
             new Alert(Alert.AlertType.INFORMATION, "Course has been saved!").show();
             generateCourseID();
-            loadCourse();
+            loadCourses();
+
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, "Failed to save course.").show();
         }
     }
 
     private void setUI(String location) throws IOException {
         Stage stage = (Stage) context.getScene().getWindow();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/institute/iitManage/view/" + location + ".fxml"));
-        stage.setScene(new Scene(loader.load()));
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/" + location + ".fxml"))));
         stage.show();
         stage.centerOnScreen();
     }
 
     private void generateCourseID() {
-        try {
-            if (Database.courseTable != null && !Database.courseTable.isEmpty()) {
-                Course lastCourse = Database.courseTable.get(Database.courseTable.size() - 1);
-                String stringId = lastCourse.getCourseId();
-                String[] split = stringId.split("-");
-                int lastIdAsInteger = Integer.parseInt(split[1]);
-                lastIdAsInteger++;
-                String newId = "C-" + lastIdAsInteger;
-                txtCourseID.setText(newId);
+        try (Connection connection = DBConnection.getInstance().getConnection()) {
+            String query = "SELECT course_id FROM course ORDER BY course_id DESC LIMIT 1";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                String lastId = resultSet.getString("course_id");
+                int newId = Integer.parseInt(lastId.split("-")[1]) + 1;
+                txtCourseID.setText("C-" + newId);
             } else {
                 txtCourseID.setText("C-1");
             }
-        } catch (Exception e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
-            // Log the exception or show an error message
-            new Alert(Alert.AlertType.ERROR, "Failed to generate course ID: " + e.getMessage()).show();
         }
     }
 
-
-
     private void setTeachers() {
-        teachersArray.clear();
-        for (Teacher t : Database.teacherTable) {
-            teachersArray.add(t.getTeacherId() + ". " + t.getName());
+        try (Connection connection = DBConnection.getInstance().getConnection()) {
+            String query = "SELECT teacher_id, teacher_name FROM teacher";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                teachersArray.add(resultSet.getInt("teacher_id") + ". " + resultSet.getString("teacher_name"));
+            }
+
+            ObservableList<String> oblist = FXCollections.observableArrayList(teachersArray);
+            cmbTeachers.setItems(oblist);
+
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
         }
-        ObservableList<String> oblist = FXCollections.observableArrayList(teachersArray);
-        cmbTeachers.setItems(oblist);
     }
 
     private boolean isExist(String tech) {
@@ -184,49 +177,47 @@ public class CourseFormController {
         return false;
     }
 
-    private void loadCourse() {
+    private void loadCourses() {
         ObservableList<CourseTm> courseList = FXCollections.observableArrayList();
 
-        for (Course c : Database.courseTable) {
-            Button techButton = new Button("Show Tech");
-            techButton.setOnAction(e -> showTechnologies(c));
+        try (Connection connection = DBConnection.getInstance().getConnection()) {
+            String query = "SELECT c.course_id, c.course_name, c.technologies, c.cost, t.teacher_name " +
+                    "FROM course c JOIN teacher t ON c.teacher_id = t.teacher_id";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
 
-            Button deleteButton = new Button("Delete");
-            deleteButton.setOnAction(e -> {
-                Database.courseTable.remove(c);
-                loadCourse();
-                new Alert(Alert.AlertType.CONFIRMATION, "Course has been deleted!").show();
-            });
+            while (resultSet.next()) {
+                Button techButton = new Button("Show Tech");
+                Button deleteButton = new Button("Delete");
 
-            CourseTm tm = new CourseTm(
-                    c.getCourseId(),
-                    c.getCourseName(),
-                    c.getTeacherId(),
-                    techButton,
-                    c.getCost(),
-                    deleteButton
-            );
+                CourseTm tm = new CourseTm(
+                        resultSet.getString("course_id"),  // Ensure correct ID format
+                        resultSet.getString("course_name"),
+                        resultSet.getString("teacher_name"),
+                        techButton,
+                        resultSet.getDouble("cost"),
+                        deleteButton
+                );
 
-            courseList.add(tm);
+                deleteButton.setOnAction(e -> {
+                    try {
+                        String deleteQuery = "DELETE FROM course WHERE course_id = ?";
+                        PreparedStatement deleteStmt = connection.prepareStatement(deleteQuery);
+                        deleteStmt.setString(1, tm.getCourseId());  // Ensure correct ID format
+                        deleteStmt.executeUpdate();
+                        new Alert(Alert.AlertType.INFORMATION, "Course has been deleted!").show();
+                        loadCourses();
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                        new Alert(Alert.AlertType.ERROR, "Failed to delete course.").show();
+                    }
+                });
+
+                courseList.add(tm);
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
         }
         tblCourse.setItems(courseList);
-    }
-
-    private void showTechnologies(Course course) {
-        // Create and show a dialog or a new window to display technologies for the selected course
-        // For simplicity, this example just shows an alert with course technologies
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Course Technologies");
-        alert.setHeaderText("Technologies for Course: " + course.getCourseName());
-        alert.setContentText(String.join(", ", course.getSubjects()));
-        alert.showAndWait();
-    }
-
-    private void setupTableInteractions() {
-        tblTechnologies.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-            if (newSelection != null) {
-                txtTechnologies.setText(newSelection.getName());
-            }
-        });
     }
 }
